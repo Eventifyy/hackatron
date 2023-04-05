@@ -1,8 +1,10 @@
-import styles from '../styles/Home.module.css'
+import MainHeader from "../components/MainHeader";
 
 export default function Home() {
-  \
+  
   return(
-    <div>Home</div>
+    <div>
+<MainHeader/>
+     </div>
   )
 }
