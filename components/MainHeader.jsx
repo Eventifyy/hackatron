@@ -161,8 +161,8 @@ export default function MainHeader() {
                         setSubmenuVisible((prev) => !prev);
                       }}
                     >
-                      Our Services
-                      <ChevronDownIcon className="h-5 w-5" />
+                      Dashboard
+                      {/* <ChevronDownIcon className="h-5 w-5" /> */}
                     </button>
                   )}
                 </Menu.Item>
@@ -242,7 +242,7 @@ export default function MainHeader() {
                         setSubmenuVisible2((prev) => !prev);
                       }}
                     >
-                      About Us
+                      Active Events
                       <ChevronDownIcon className="h-5 w-5" />
                     </button>
                   )}
@@ -265,7 +265,7 @@ export default function MainHeader() {
                           className=' text-gray-900 group flex w-full items-center rounded-md px-2 py-2 text-sm'
 
                         >
-                          Contact
+                          Host Event
                         </button>
                       )}
                     </Menu.Item>
@@ -325,14 +325,14 @@ export default function MainHeader() {
                       'group inline-flex items-center rounded-md text-base text-gray-500 font-medium hover:text-white focus:outline-none lg:h-2'
                     )}
                   >
-                    <span>Our Services</span>
-                    <ChevronDownIcon
+                    <span>Dashboard</span>
+                    {/* <ChevronDownIcon
                       className={classNames(
                         open ? 'text-gray-600' : 'text-gray-400',
                         'ml-2 h-5 w-5'
                       )}
                       aria-hidden="true"
-                    />
+                    /> */}
                   </Popover.Button>
 
                   <Transition
@@ -385,11 +385,11 @@ export default function MainHeader() {
               )}
             </Popover>
 
-            <a href="/about/blogs" className="text-base font-medium text-gray-500 hover:text-white sm:hidden md:flex">
+            {/* <a href="/about/blogs" className="text-base font-medium text-gray-500 hover:text-white sm:hidden md:flex">
               Blogs
-            </a>
+            </a> */}
             <a href="/about" className="text-base font-medium text-gray-500 hover:text-white sm:hidden md:flex">
-              Contact
+              Host Event
             </a>
             {/* <Link to="/about" className="text-base font-medium text-gray-500 hover:text-black ">
               About Us
@@ -404,14 +404,14 @@ export default function MainHeader() {
                       'group inline-flex items-center rounded-md text-base font-medium text-gray-500 hover:text-white focus:outline-none'
                     )}
                   >
-                    <span>About Us</span>
-                    <ChevronDownIcon
+                    <span>Active Event</span>
+                    {/* <ChevronDownIcon
                       className={classNames(
                         open ? 'text-gray-600' : 'text-gray-400',
                         'ml-2 h-5 w-5 '
                       )}
                       aria-hidden="true"
-                    />
+                    /> */}
                   </Popover.Button>
 
                   <Transition
@@ -445,7 +445,7 @@ export default function MainHeader() {
                           ))}
                         </div>
                         <div className="bg-gray-50 px-5 py-5 sm:px-8 sm:py-8">
-                          <div>
+                          {/* <div>
                             <h3 className="text-base font-medium text-gray-500">Blogs</h3>
                             <ul role="list" className="mt-4 space-y-4">
                               {recentPosts.map((post) => (
@@ -456,7 +456,7 @@ export default function MainHeader() {
                                 </li>
                               ))}
                             </ul>
-                          </div>
+                          </div> */}
                           <div className="mt-5 text-sm">
                             <a href="/about/blogs" className="font-medium text-indigo-600"
                             onClick={()=>{
