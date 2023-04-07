@@ -2,7 +2,7 @@ import close from "./close.svg";
 import menu from "./menu.svg";
 import vistarcm from './vistarcm.png';
 export{
+    vistarcm,
     close,
-    menu,
-    vistarcm
+    menu
 }
