@@ -7,7 +7,7 @@ export default function ConnectWallet() {
 
     const [auth, setAuth] = useState()
     const [provider, setProvider] = useState()
-    const [user, setUser] = useState({})
+
 
     const clientId = process.env.NEXT_PUBLIC_CLIENT_ID
 
@@ -57,24 +57,11 @@ export default function ConnectWallet() {
         setProvider(web3authProvider)
     }
 
-    async function getUserInfo() {
-
-        const user = await auth.getUserInfo()
-        setUser(user)
-        console.log(user)
-    }
-    
-    function click() {
-        console.log(provider)
-    }
 
 
     return (
         <div>
             {provider ? <button onClick={logout}>logout</button> : <button onClick={login}>login</button>}
-            <p>{user.email}</p>
-            <button onClick={getUserInfo}>debug</button>
-            
         </div>
     )
 }
