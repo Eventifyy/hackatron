@@ -1,7 +1,11 @@
+import ConnectWallet from "../components/connectWallet"
+
 const Login = () => {
   return (
     <div>
-      <h1>Login/Signup Page</h1>
+      <h1>Login/Signup Page
+        <ConnectWallet />
+      </h1>
     </div>
   )
 }

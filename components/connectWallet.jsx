@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
 import { PaperEmbeddedWalletSdk, UserStatus } from "@paperxyz/embedded-wallet-service-sdk";
+import { useEffect, useState } from 'react';
 
-export default function Dashboard() {
+export default function Sign() {
 
     const [sdk, setSdk] = useState()
+    const [logged, setLogged] = useState(false)
     const [user, setUser] = useState({})
+
 
     const clientId = process.env.NEXT_PUBLIC_PAPER_KEY
 
@@ -14,7 +16,6 @@ export default function Dashboard() {
             chain: 'Mumbai',
         }))
     }, [])
-
 
     useEffect(() => {
         getUserInfo()
@@ -27,17 +28,25 @@ export default function Dashboard() {
         }
     }
 
+    async function login() {
+        await sdk.auth.loginWithPaperModal();
+        setLogged(true)
+    }
+
+    async function logout() {
+        await sdk.auth.logout();
+        setLogged(false)
+    }
+
     function click() {
-        console.log(user)
+        console.log(user.status)
     }
 
 
     return (
         <div>
-            <p>Dashboard</p>
-            <p>email: {user?.authDetails?.email || ""}</p>
-            <p>address: {user?.walletAddress || ""}</p>
-            <button onClick={click}>debug</button>
+            {user.status == 'Logged In, Wallet Initialized' ? <button onClick={logout}>logout</button> : <button onClick={login}>login</button>}
+            <button onClick={click}>click</button>
         </div>
     )
 }

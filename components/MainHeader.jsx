@@ -2,10 +2,6 @@ import { Fragment } from 'react'
 import { Popover, Transition, } from '@headlessui/react'
 import { Menu } from '@headlessui/react'
 import { useState } from 'react'
-import Image from "next/image";
-import Link from "next/link"
-
-
 import {
   // ArrowPathIcon,
   Bars3Icon,
@@ -23,7 +19,7 @@ import {
   EnvelopeIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-
+import { vistamobile, vistarcm } from '../assets'
 // import { Link} from 'react-router-dom'
 
 
@@ -113,19 +109,16 @@ export default function MainHeader() {
   
   return (
     <Popover className="relative bg-black">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="flex items-center justify-between py-4 md:justify-start md:space-x-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
            <div className="flex justify-start lg:w-0 lg:flex-1">
             {/* <Link to="/"> */}
               <span className="sr-only">Your Company</span>
-              {/* <img
-                className="h-20 w-48"
-                src={logo}
+              <img
+                className="h-8 w-auto sm:h-10"
+                src={vistarcm}
                 alt=""
-              /> */}
-              <Image src="/logo.svg" width="120" height="148">
-
-              </Image>
+              />
             {/* </Link> */}
           </div>
           {/*<div className="-my-2 -mr-2 md:hidden">
@@ -308,7 +301,7 @@ export default function MainHeader() {
                         active ? 'bg-violet-500 text-white' : 'text-gray-900'
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     >
-                      Login/Signup
+                      Connect Wallet
                     </a>
                   )}
                 </Menu.Item>
@@ -488,12 +481,12 @@ export default function MainHeader() {
             {/* <Link href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
               Book a free trial
             </Link> */}
-            <Link legacyBehavior
-              href="/login"
-             
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdPPPSfMK7sKrTi2pAyr-zUbNLAIk1wvHeZJusZYNiWOKRbBA/viewform"
+              className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-black shadow-sm hover:bg-indigo-700"
             >
-             <a  className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-[#8A42D8] px-4 py-2 text-base font-medium text-black shadow-sm hover:bg-indigo-700">Login/Signup</a> 
-            </Link>
+              Connect Wallet
+            </a>
           </div>
         </div>
       </div>
