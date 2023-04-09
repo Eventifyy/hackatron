@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PaperEmbeddedWalletSdk, UserStatus } from "@paperxyz/embedded-wallet-service-sdk";
+import CreateNFT from '../components/CreateNFT';
+import HostComponent from '../components/HostComponent';
 
 export default function Host() {
 
@@ -31,9 +33,12 @@ export default function Host() {
     }
 
     return (
-        <div>
-            <p>Host</p>
-            <button onClick={click}>Debug</button>
+    <div>
+        <div className='bg-[#00040f]'>
+            <HostComponent/>
         </div>
+        <CreateNFT/>
+    </div>
+        
     )
 }
