@@ -51,6 +51,7 @@ export default function Host() {
                 console.error(error);
             });
     }
+    
 
     function click() {
         mint()
