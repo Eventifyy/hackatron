@@ -18,8 +18,13 @@
 }
 
 * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Eudoxus Sans", sans-serif;
   scroll-behavior: smooth;
 }
+
 
 .text-gradient {
   background: radial-gradient(
@@ -157,4 +162,8 @@
   #cta-img-nml-50 {
     margin-left: 50px;
   }
+}
+.hero-gradient {
+  background: rgba(149, 66, 232, 0.35);
+  filter: blur(175px);
 }

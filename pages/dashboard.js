@@ -88,6 +88,7 @@ export default function Dashboard() {
 
     return (
         <div>
+
             <p>Dashboard</p>
             <p>email: {user?.authDetails?.email || ""}</p>
             <p>address: {user?.walletAddress || ""}</p>
@@ -107,6 +108,7 @@ export default function Dashboard() {
                 />
             })}
             <button onClick={click}>debug</button>
+            <Dashboard/>
         </div>
     )
 }

@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { PaperEmbeddedWalletSdk, UserStatus } from "@paperxyz/embedded-wallet-service-sdk";
 import CreateNFT from '../components/CreateNFT';
 import HostComponent from '../components/HostComponent';
+import WhatsNew from '../components/WhatsNew';
+import Footer from '../components/Footer'
+import Features from '../components/Features';
 
 export default function Host() {
 
@@ -59,10 +62,17 @@ export default function Host() {
 
     return (
         <div>
-            <div className='bg-[#00040f]'>
+            <div className='bg-[#00040f] overflow-hidden z-0'>
                 <HostComponent />
+                <Features/>
+                <WhatsNew/>
             </div>
             <CreateNFT />
+            <div className='bg-[#00040f] overflow-hidden'>
+
+            <Footer/>
+            </div>
+            
         </div>
 
     )
