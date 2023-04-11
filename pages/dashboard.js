@@ -32,7 +32,7 @@ export default function Dashboard() {
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        fetch();
+        // fetch();
     }, []);
 
     async function fetch() {
@@ -108,7 +108,7 @@ export default function Dashboard() {
                 />
             })}
             <button onClick={click}>debug</button>
-            <Dashboard/>
+            {/* <Dashboard/> */}
         </div>
     )
 }
