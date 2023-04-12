@@ -79,7 +79,9 @@ import {
       setImgBase64(null)
       setTitle('')
       setPrice('')
-      setDescription('')
+      setVenue('')
+      setDate('')
+      setHost('')
     }
   
     return (
@@ -91,7 +93,7 @@ import {
         <div className="bg-[#151c25] shadow-xl shadow-[#e32970] rounded-xl w-11/12 md:w-2/5 h-7/12 p-6">
           <form className="flex flex-col">
             <div className="flex flex-row justify-between items-center">
-              <p className="font-semibold text-gray-400">Add NFT</p>
+              <p className="font-semibold text-gray-400">Add Event</p>
               <button
                 type="button"
                 onClick={closeModal}
@@ -162,8 +164,49 @@ import {
                 required
               />
             </div>
-  
+
             <div className="flex flex-row justify-between items-center bg-gray-800 rounded-xl mt-5">
+              <input
+                className="block w-full text-sm
+                  text-slate-500 bg-transparent border-0
+                  focus:outline-none focus:ring-0"
+                type="text"
+                name="venue"
+                placeholder="Venue"
+                onChange={(e) => setVenue(e.target.value)}
+                value={title}
+                required
+              />
+            </div>
+            <div className="flex flex-row justify-between items-center bg-gray-800 rounded-xl mt-5">
+              <input
+                className="block w-full text-sm
+                  text-slate-500 bg-transparent border-0
+                  focus:outline-none focus:ring-0"
+                type="text"
+                name="date"
+                placeholder="Date"
+                onChange={(e) => setDate(e.target.value)}
+                value={title}
+                required
+              />
+
+            </div>
+            <div className="flex flex-row justify-between items-center bg-gray-800 rounded-xl mt-5">
+              <input
+                className="block w-full text-sm
+                  text-slate-500 bg-transparent border-0
+                  focus:outline-none focus:ring-0"
+                type="text"
+                name="host"
+                placeholder="Host"
+                onChange={(e) => setHost(e.target.value)}
+                value={title}
+                required
+              />
+            </div>
+  
+            {/* <div className="flex flex-row justify-between items-center bg-gray-800 rounded-xl mt-5">
               <textarea
                 className="block w-full text-sm resize-none
                   text-slate-500 bg-transparent border-0
@@ -175,7 +218,7 @@ import {
                 value={description}
                 required
               ></textarea>
-            </div>
+            </div> */}
   
             <button
               type="submit"
@@ -188,7 +231,7 @@ import {
                 hover:border hover:border-[#bd255f]
                 focus:outline-none focus:ring mt-5"
             >
-              Mint Now
+              Host Now
             </button>
           </form>
         </div>

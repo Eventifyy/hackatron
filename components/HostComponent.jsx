@@ -33,8 +33,8 @@ const HostComponent = () => {
       <div className="flex flex-col justify-center items-center mx-auto py-10">
         <div className="flex flex-col justify-center items-center">
           <h1 className="text-white text-5xl font-bold text-center">
-            A.I Arts <br />
-            <span className="text-gradient">NFTs</span> Collection
+            Host <br />
+            <span className="text-gradient">NFTs</span> Events
           </h1>
 
           <p className="text-white font-semibold text-sm mt-3">
@@ -47,7 +47,7 @@ const HostComponent = () => {
             rounded-full cursor-pointer my-4"
             onClick={onCreatedNFT}
           >
-            Mint Now
+            Host Now
           </button>
 
           <a
