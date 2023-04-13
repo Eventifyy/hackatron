@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { address, abi } from "../config"
+// import { address, abi } from "../config"
 import web3modal from "web3modal";
 import { ethers } from "ethers";
 import axios from "axios";
@@ -9,9 +9,9 @@ export default function Events() {
     const [items, setItems] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
-    useEffect(() => {
-        fetch();
-    }, []);
+    // useEffect(() => {
+    //     fetch();
+    // }, []);
 
     async function fetch() {
         const modal = new web3modal();
@@ -22,6 +22,7 @@ export default function Events() {
             abi,
             provider
         );
+        
         const data = await contract.activeEvents();
         const itemsFetched = await Promise.all(
             data.map(async (i) => {

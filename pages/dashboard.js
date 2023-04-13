@@ -88,8 +88,7 @@ export default function Dashboard() {
 
     return (
         <div>
-
-            <p>Dashboard</p>
+            {/* <p>Dashboard</p>
             <p>email: {user?.authDetails?.email || ""}</p>
             <p>address: {user?.walletAddress || ""}</p>
             {items.map((item,) => {
@@ -107,7 +106,7 @@ export default function Dashboard() {
                     host={item.host}
                 />
             })}
-            <button onClick={click}>debug</button>
+            <button onClick={click}>debug</button> */}
             {/* <Dashboard/> */}
         </div>
     )
