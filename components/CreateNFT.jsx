@@ -7,7 +7,7 @@ import {
 } from '../store'
 import { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
-import { Web3Storage } from 'web3.storage'
+// import { Web3Storage } from 'web3.storage'
 //   import { mintNFT } from '../Blockchain.Services'
 
 
@@ -216,7 +216,7 @@ const CreateNFT = () => {
               step={0.01}
               min={0.01}
               name="price"
-              placeholder="Price (Eth)"
+              placeholder="Price (TRX)"
               onChange={(e) =>
                 setFormInput({ ...formInput, price: e.target.value })
               }

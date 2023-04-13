@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import web3modal from "web3modal";
 import { ethers } from "ethers";
 import axios from "axios";
+import Insights from '../components/Insights';
 
 export default function Events() {
 
@@ -66,7 +67,7 @@ export default function Events() {
         <div>
             <p>Events</p>
             {items.map((item,) => {
-                <Card
+                <Insights
                     key={i}
                     price={item.price}
                     name={item.name}
