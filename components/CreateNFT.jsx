@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+//   import { mintNFT } from '../Blockchain.Services'
 import {
   useGlobalState,
   setGlobalState,
@@ -7,14 +8,13 @@ import {
 } from '../store'
 import { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
-// import { Web3Storage } from 'web3.storage'
-//   import { mintNFT } from '../Blockchain.Services'
-
-
+import { Web3Storage } from 'web3.storage'
+import web3modal from 'web3modal'
+import { ethers } from 'ethers'
+import { EventifyAddress, EventfiyAbi } from "../config"
 
 const CreateNFT = () => {
   const [modal] = useGlobalState('modal')
-  const [fileUrl, setFileUrl] = useState('')
   const [imgBase64, setImgBase64] = useState(null)
 
   const [formInput, setFormInput] = useState({
@@ -24,8 +24,7 @@ const CreateNFT = () => {
     description: '',
     date: '',
     venue: '',
-    date: '',
-    supply: null,
+    supply: '',
   })
 
   // -----------
@@ -40,29 +39,64 @@ const CreateNFT = () => {
 
   const uploadToIPFS = async (files) => {
     const client = makeStorageClient()
-    console.log(files)
-    // const cid = await client.put(files)
-    // return cid
+    const cid = await client.put(files)
+    return cid
   }
 
   const changeImage = async (e) => {
-
     const reader = new FileReader()
     if (e.target.files[0]) reader.readAsDataURL(e.target.files[0])
-    
-    reader.onload = async (readerEvent) => {
+
+    reader.onload = (readerEvent) => {
       const file = readerEvent.target.result
       setImgBase64(file)
     }
-    const file = e.target.files[0]
-    // console.log(file)
-    // const metaCID = await uploadToIPFS(file)
-    // const url = `https://ipfs.io/ipfs/${metaCID}/data.json`
-    // setFormInput({ ...formInput, cover: url })
-
+    const inputFile = e.target.files[0]
+    const inputFileName = e.target.files[0].name
+    const files = [new File([inputFile], inputFileName)]
+    const metaCID = await uploadToIPFS(files)
+    const url = `https://ipfs.io/ipfs/${metaCID}/${inputFileName}`
+    console.log(url)
+    setFormInput({ ...formInput, cover: url })
   }
 
-  const mint = async (e) => {}
+  const metadata = async () => {
+    const { price, name, cover, description, date, venue, supply } = formInput
+    // if (!name || !price || !description || !date || !venue || !supply) return
+    const data = JSON.stringify({ name, cover, description, date, venue })
+    const files = [new File([data], 'data.json')]
+    try {
+      const metaCID = await uploadToIPFS(files)
+      const metaUrl = `https://ipfs.io/ipfs/${metaCID}/data.json`
+      console.log(metaUrl)
+      return metaUrl
+    } catch (error) {
+      console.log('Error uploading:', error)
+    }
+  }
+
+  const mint = async (e) => {
+    e.preventDefault()
+	
+    // need metamask
+    const modal = new web3modal({
+		network: 'mumbai',
+		cacheProvider: true,
+    })
+    const connection = await modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+    const contract = new ethers.Contract(EventifyAddress, EventfiyAbi, signer)
+	const metadataUrl = await metadata()
+    const price = ethers.utils.parseEther(formInput.price)
+    const supply = formInput.supply
+    const publish = await contract.host(price, supply, metadataUrl, {
+      gasLimit: 1000000,
+    })
+    await publish.wait()
+    console.log(publish)
+	closeModal()
+  }
 
   // -----------
 
@@ -72,13 +106,8 @@ const CreateNFT = () => {
   }
 
   const resetForm = () => {
-    setFileUrl('')
+    // setFormInput({})
     setImgBase64(null)
-    setTitle('')
-    setPrice('')
-    setVenue('')
-    setDate('')
-    setHost('')
   }
 
   return (
@@ -107,7 +136,7 @@ const CreateNFT = () => {
                 className="h-full w-full object-cover cursor-pointer"
                 src={
                   imgBase64 ||
-                  'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80'
+                  './download.gif'
                 }
               />
             </div>
@@ -142,7 +171,7 @@ const CreateNFT = () => {
               placeholder="Name"
               onChange={(e) =>
                 setFormInput({ ...formInput, name: e.target.value })
-              } 
+              }
               required
             />
           </div>
@@ -197,9 +226,9 @@ const CreateNFT = () => {
               className="block w-full text-sm
                   text-slate-500 bg-transparent border-0
                   focus:outline-none focus:ring-0"
-              type="text"
+              type="number"
               name="host"
-              placeholder="Host"
+              placeholder="Supply"
               onChange={(e) =>
                 setFormInput({ ...formInput, supply: e.target.value })
               }
@@ -216,13 +245,26 @@ const CreateNFT = () => {
               step={0.01}
               min={0.01}
               name="price"
-              placeholder="Price (TRX)"
+              placeholder="Price (Eth)"
               onChange={(e) =>
                 setFormInput({ ...formInput, price: e.target.value })
               }
               required
             />
           </div>
+
+          <button
+            onClick={mint}
+            className="flex flex-row justify-center items-center
+                w-full text-white text-md bg-[#e32970]
+                hover:bg-[#bd255f] py-2 px-5 rounded-full
+                drop-shadow-xl border border-transparent
+                hover:bg-transparent hover:text-[#e32970]
+                hover:border hover:border-[#bd255f]
+                focus:outline-none focus:ring mt-5"
+          >
+            Host bitch
+          </button>
 
           <button
             type="submit"
@@ -235,7 +277,7 @@ const CreateNFT = () => {
                 hover:border hover:border-[#bd255f]
                 focus:outline-none focus:ring mt-5"
           >
-            Host Now
+            Dummy
           </button>
         </form>
       </div>

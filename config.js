@@ -1,8 +1,8 @@
-export const EventifyAddress = "0xCa0D9b0e708D87d2c688636302dd5B2Bde590369"
+export const EventifyAddress = "0xdd6Ef32c5c6F64a388601E1b506A638d97775aaE"
 
 export const BridgeAddress = ""
 
-export const EventfiyAbi = "[
+export const EventfiyAbi = [
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -166,6 +166,11 @@ export const EventfiyAbi = "[
 						"internalType": "bool",
 						"name": "whitelisted",
 						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct Eventify.Ticket[]",
@@ -279,6 +284,60 @@ export const EventfiyAbi = "[
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToTicket",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "host",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "supply",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "remaining",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "buyLink",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "whitelisted",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "inventory",
 		"outputs": [
@@ -318,6 +377,11 @@ export const EventfiyAbi = "[
 						"internalType": "bool",
 						"name": "whitelisted",
 						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct Eventify.Ticket[]",
@@ -534,6 +598,61 @@ export const EventfiyAbi = "[
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "unverifiedEvents",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "supply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "remaining",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "buyLink",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "whitelisted",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Eventify.Ticket[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -552,9 +671,9 @@ export const EventfiyAbi = "[
 		"stateMutability": "view",
 		"type": "function"
 	}
-]"
+]
 
-export const BridgeAbi = "[
+export const BridgeAbi = [
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -913,4 +1032,4 @@ export const BridgeAbi = "[
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-]"
+]

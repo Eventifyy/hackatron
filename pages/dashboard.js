@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { PaperEmbeddedWalletSdk, UserStatus } from "@paperxyz/embedded-wallet-service-sdk";
+import { EventifyAddress, EventfiyAbi } from "../config"
+import { ethers } from "ethers";
+import axios from "axios";
 
 export default function Dashboard() {
 
@@ -31,14 +34,14 @@ export default function Dashboard() {
     const [items, setItems] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
-    useEffect(() => {
-        // fetch();
-    }, []);
+    // useEffect(() => {
+    //     fetch();
+    // }, []);
+
+    const INFURA_ID = process.env.NEXT_PUBLIC_INFURA
 
     async function fetch() {
-        const modal = new web3modal();
-        const connection = await modal.connect();
-        const provider = new ethers.providers.Web3Provider(connection);
+        const provider = new ethers.providers.JsonRpcProvider(`https://polygon-mumbai.infura.io/v3/${INFURA_ID}`)
         const contract = new ethers.Contract(
             address,
             abi,
