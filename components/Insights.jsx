@@ -1,12 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-
-// import styles from '../styles';
 import styles from '../styles/style';
-import { insights } from '../constants';
 import { staggerContainer } from '../utils/motion';
-// import { InsightCard, TitleText, TypingText } from '../components';
 import { TypingText, TitleText } from './CustomTexts';
 import InsightCard from './InsightsCard';
 
@@ -41,6 +37,8 @@ const Insights = (props) => {
       </div>
     </motion.div>
   </section>
+
+  
     )
 }
 

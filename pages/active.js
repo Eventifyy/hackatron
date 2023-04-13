@@ -1,5 +1,11 @@
-import Insights from "../components/Insights"
-import Tickets from "../components/Tickets"
+// import Insights from "../components/Insights"
+import { motion } from 'framer-motion';
+import styles from '../styles/style';
+import { staggerContainer } from '../utils/motion';
+import InsightCard from '../components/InsightsCard';
+import { TypingText, TitleText } from '../components/CustomTexts';
+
+
 import { useEffect, useState } from 'react';
 import { EventifyAddress, EventfiyAbi } from "../config"
 import { ethers } from "ethers";
@@ -74,9 +80,42 @@ const Active = () => {
 
 
     return(
-        <div className="bg-[#151c25]">
-            <Insights/>
-        </div>
+        // <div className="bg-[#151c25]">
+
+        //     <Insights/>
+        // </div>
+
+        <section className={`sm:p-16 xs:p-8 px-10 py-12 relative z-10 bg-[#151c25] `}>
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.25 }}
+          className={`${styles.innerWidth} mx-auto flex flex-col`}
+        >
+          <TypingText title="| Insight" textStyles="text-center" />
+          <TitleText title={<>Insight about events</>} textStyles="text-center" />
+          <div className="mt-[50px] flex flex-col gap-[30px]">
+
+            {items.map((item,i) =>{
+              <InsightCard 
+              key={i}
+              price={item.price}
+              name={item.name}
+              cover={item.cover}
+              date={item.date}
+              venue={item.venue}
+              theme={item.theme}
+              tokenId={item.supply}
+              supply={item.supply}
+              remaining={item.remaining}
+              host={item.host}
+              buyLink={item.buyLink}
+              />
+            })}
+          </div>
+        </motion.div>
+      </section>
     )
 }
 
