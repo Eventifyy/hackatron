@@ -9,7 +9,9 @@ import {
 import { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import { Web3Storage } from 'web3.storage'
-// import { EventifyAddress, EventfiyAbi } from "../config"
+import web3modal from 'web3modal'
+import { ethers } from 'ethers'
+import { EventifyAddress, EventfiyAbi } from "../config"
 
 const CreateNFT = () => {
   const [modal] = useGlobalState('modal')
@@ -22,7 +24,7 @@ const CreateNFT = () => {
     description: '',
     date: '',
     venue: '',
-    supply: null,
+    supply: '',
   })
 
   // -----------
@@ -84,7 +86,7 @@ const CreateNFT = () => {
     const connection = await modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
-    const contract = new ethers.Contract(contractAddress, Gum3road.abi, signer)
+    const contract = new ethers.Contract(EventifyAddress, EventfiyAbi, signer)
 	const metadataUrl = await metadata()
     const price = ethers.utils.parseEther(formInput.price)
     const supply = formInput.supply
@@ -92,8 +94,8 @@ const CreateNFT = () => {
       gasLimit: 1000000,
     })
     await publish.wait()
-
-    console.log(url)
+    console.log(publish)
+	closeModal()
   }
 
   // -----------
@@ -104,13 +106,8 @@ const CreateNFT = () => {
   }
 
   const resetForm = () => {
-    setFileUrl('')
+    // setFormInput({})
     setImgBase64(null)
-    setTitle('')
-    setPrice('')
-    setVenue('')
-    setDate('')
-    setHost('')
   }
 
   return (
@@ -139,7 +136,7 @@ const CreateNFT = () => {
                 className="h-full w-full object-cover cursor-pointer"
                 src={
                   imgBase64 ||
-                  'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80'
+                  './download.gif'
                 }
               />
             </div>

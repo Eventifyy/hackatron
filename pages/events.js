@@ -8,22 +8,27 @@ export default function Events() {
     const [items, setItems] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
-    // useEffect(() => {
-    //     fetch();
-    // bridge();
-    // }, []);
+    useEffect(() => {
+        fetch();
+    }, []);
 
     const INFURA_ID = process.env.NEXT_PUBLIC_INFURA
 
+    const provider = new ethers.providers.JsonRpcProvider(`https://polygon-mumbai.infura.io/v3/${INFURA_ID}`)
+        
+    provider.once('purchased', () => {
+        console.log('a tx just occurred')
+        // bridge(host, owner, tokenUri)
+    })
+
     async function fetch() {
-        const provider = new ethers.providers.JsonRpcProvider(`https://polygon-mumbai.infura.io/v3/${INFURA_ID}`)
         const contract = new ethers.Contract(
-            address,
-            abi,
+            EventifyAddress,
+            EventfiyAbi,
             provider
         );
         
-        const data = await contract.activeEvents();
+        const data = await contract.unverifiedEvents();
         const itemsFetched = await Promise.all(
             data.map(async (i) => {
                 const tokenUri = await contract.uri(i.tokenId.toString());
@@ -39,23 +44,21 @@ export default function Events() {
                     supply: i.supply.toNumber(),
                     tokenId: i.tokenId.toNumber(),
                     remaining: i.remaining.toNumber(),
-                    host: i.host.toNumber(),
-                    buyLink: i.buyLink.toNumber(),
+                    host: i.host,
+                    buyLink: i.buyLink.toString(),
                 };
                 return item;
             })
         );
 
-        console.log(items);
         setItems(itemsFetched);
+        console.log(itemsFetched);
         setLoaded(true);
     }
 
-    async function bridge() {
-        provider.on('purchased', () => {
-            console.log('a tx just occurred')
-        })
-    } 
+    async function bridge(host, owner, tokenUri) {
+
+    }
 
 
     function Card(prop) {
@@ -71,7 +74,7 @@ export default function Events() {
     return (
         <div>
             <p>Events</p>
-            {items.map((item,) => {
+            {items.map((item, i) => {
                 <Card
                     key={i}
                     price={item.price}

@@ -1,4 +1,4 @@
-import { PaperEmbeddedWalletSdk, UserStatus } from "@paperxyz/embedded-wallet-service-sdk";
+import { PaperEmbeddedWalletSdk } from "@paperxyz/embedded-wallet-service-sdk";
 import { useEffect, useState } from 'react';
 
 export default function Sign() {
@@ -45,8 +45,8 @@ export default function Sign() {
 
     return (
         <div>
-            {user.status == 'Logged In, Wallet Initialized' ? <button onClick={logout}>logout</button> : <button onClick={login}>login</button>}
-            <button onClick={click}>click</button>
+            {user.status == 'Logged In, Wallet Initialized' ? <button onClick={logout}>Logout</button> : <button onClick={login}>Login</button>}
+            {/* <button onClick={click}>click</button> */}
         </div>
     )
 }
