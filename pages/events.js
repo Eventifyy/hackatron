@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-// import { address, abi } from "../config"
-import web3modal from "web3modal";
+import { EventifyAddress, EventfiyAbi } from "../config"
 import { ethers } from "ethers";
 import axios from "axios";
 
@@ -11,12 +10,13 @@ export default function Events() {
 
     // useEffect(() => {
     //     fetch();
+    // bridge();
     // }, []);
 
+    const INFURA_ID = process.env.NEXT_PUBLIC_INFURA
+
     async function fetch() {
-        const modal = new web3modal();
-        const connection = await modal.connect();
-        const provider = new ethers.providers.Web3Provider(connection);
+        const provider = new ethers.providers.JsonRpcProvider(`https://polygon-mumbai.infura.io/v3/${INFURA_ID}`)
         const contract = new ethers.Contract(
             address,
             abi,
@@ -33,11 +33,11 @@ export default function Events() {
                     price,
                     name: meta.data.name,
                     cover: meta.data.cover,
+                    description: meta.data.description,
                     date: meta.data.date,
                     venue: meta.data.venue,
-                    theme: meta.data.theme,
-                    tokenId: i.tokenId.toNumber(),
                     supply: i.supply.toNumber(),
+                    tokenId: i.tokenId.toNumber(),
                     remaining: i.remaining.toNumber(),
                     host: i.host.toNumber(),
                     buyLink: i.buyLink.toNumber(),
@@ -50,6 +50,12 @@ export default function Events() {
         setItems(itemsFetched);
         setLoaded(true);
     }
+
+    async function bridge() {
+        provider.on('purchased', () => {
+            console.log('a tx just occurred')
+        })
+    } 
 
 
     function Card(prop) {

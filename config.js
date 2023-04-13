@@ -2,7 +2,7 @@ export const EventifyAddress = "0xCa0D9b0e708D87d2c688636302dd5B2Bde590369"
 
 export const BridgeAddress = ""
 
-export const EventfiyAbi = "[
+export const EventfiyAbi = [
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -552,9 +552,9 @@ export const EventfiyAbi = "[
 		"stateMutability": "view",
 		"type": "function"
 	}
-]"
+]
 
-export const BridgeAbi = "[
+export const BridgeAbi = [
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -913,4 +913,4 @@ export const BridgeAbi = "[
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-]"
+]
