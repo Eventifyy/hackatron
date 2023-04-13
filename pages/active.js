@@ -14,7 +14,7 @@ import axios from "axios";
 const Active = () => {
     const [items, setItems] = useState([]);
     const [loaded, setLoaded] = useState(false);
-
+    console.log(items,"items loaded")
     useEffect(() => {
         fetch();
     }, []);
@@ -59,7 +59,7 @@ const Active = () => {
         );
 
         setItems(itemsFetched);
-        console.log(itemsFetched);
+        // console.log(itemsFetched);
         setLoaded(true);
     }
 
@@ -93,25 +93,31 @@ const Active = () => {
           viewport={{ once: false, amount: 0.25 }}
           className={`${styles.innerWidth} mx-auto flex flex-col`}
         >
+                      <div className="gradient-04 z-0" />
+
           <TypingText title="| Insight" textStyles="text-center" />
           <TitleText title={<>Insight about events</>} textStyles="text-center" />
           <div className="mt-[50px] flex flex-col gap-[30px]">
 
+
             {items.map((item,i) =>{
-              <InsightCard 
-              key={i}
-              price={item.price}
-              name={item.name}
-              cover={item.cover}
-              date={item.date}
-              venue={item.venue}
-              theme={item.theme}
-              tokenId={item.supply}
-              supply={item.supply}
-              remaining={item.remaining}
-              host={item.host}
-              buyLink={item.buyLink}
-              />
+                return(
+                    
+                    <InsightCard 
+                    key={i}
+                    price={item.price}
+                    name={item.name}
+                    cover={item.cover}
+                    date={item.date}
+                    venue={item.venue}
+                    theme={item.theme}
+                    tokenId={item.supply}
+                    supply={item.supply}
+                    remaining={item.remaining}
+                    host={item.host}
+                    buyLink={item.buyLink}
+                    />
+                )
             })}
           </div>
         </motion.div>

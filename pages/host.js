@@ -35,18 +35,18 @@ export default function Host() {
     
 
     return (
-        <div>
-            <div className='bg-[#00040f] overflow-hidden z-0'>
-                <HostComponent />
-                <Features/>
-                <WhatsNew/>
-            </div>
-            <CreateNFT />
-            <div className='bg-[#00040f] overflow-hidden'>
 
-            <Footer/>
-            </div>
-            
+
+        <div className="bg-[#00040f] overflow-hidden">
+        <HostComponent />
+      <div className="relative">
+        <div className="gradient-03 z-0" />
+          <Features />
+          <div className="gradient-03 z-0" />
+          <WhatsNew/>
+          <Footer/>
+          <CreateNFT/>
+        </div>
         </div>
 
     )

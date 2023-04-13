@@ -22,8 +22,10 @@ export default function Home() {
         </div>
       </div>
       <div >
-        <Explore className="gradient-03 z-0" />
+        <Explore/>
         <World />
+      <div className="gradient-04 z-0 " />
+      <div className="gradient-03 z-0 " />
       </div>
 
       <div>
