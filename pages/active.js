@@ -11,12 +11,17 @@ import { useEffect, useState } from 'react';
 import { EventifyAddress, EventfiyAbi } from "../config"
 import { ethers } from "ethers";
 import axios from "axios";
+import DashboardComponent from '../components/DashboardComponent';
+
 
 const Active = () => {
     const [items, setItems] = useState([]);
     const [loaded, setLoaded] = useState(false);
+<<<<<<< Updated upstream
     const [sdk, setSdk] = useState()
     const [user, setUser] = useState({})
+=======
+>>>>>>> Stashed changes
 
     console.log(items,"items loaded")
     useEffect(() => {
