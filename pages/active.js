@@ -13,7 +13,7 @@ import { socials } from '../constants';
 
 import { footerVariants } from '../utils/motion';
 
-const Active = () => {
+const Active = ({result}) => {
     const [items, setItems] = useState([]);
     const [loaded, setLoaded] = useState(false);
     const [sdk, setSdk] = useState()
@@ -49,86 +49,15 @@ const Active = () => {
 
     // ---------
 
-    async function generateLink(__tokenId) {
-        const data = {
-            contractId: "f5b49e5b-2027-44c8-892c-911a17dffbea",
-            title: "Mumbai Example",
-            description: "Describe your project *with Markdown!*",
-            imageUrl: "https://unsplash.it/240/240",
-            expiresInMinutes: 15,
-            limitPerTransaction: 5,
-            twitterHandleOverride: "string",
-            successCallbackUrl: "string",
-            redirectAfterPayment: false,
-            cancelCallbackUrl: "string",
-            walletAddress: user.walletAddress,
-            email: user.authDetails.email,
-            sendEmailOnCreation: false,
-            requireVerifiedEmail: false,
-            quantity: 1,
-            metadata: {},
-            mintMethod: {
-              name: "buyTicket",
-              args: {
-                  _ticketId: __tokenId,
-                  _host: user.walletAddress,
-              },
-              payment: {
-                currency: "MATIC",
-                value: "0.01 * 1"
-              }
-            },
-            eligibilityMethod: {
-              name: "string",
-              args: {
-                METHOD_ARG_NAME: "Unknown Type: mixed type"
-              }
-            },
-            contractArgs: "string",
-            feeBearer: "BUYER",
-            hideNativeMint: false,
-            hidePaperWallet: false,
-            hideExternalWallet: false,
-            hidePayWithCard: false,
-            hidePayWithCrypto: false,
-            hidePayWithIdeal: true,
-            sendEmailOnTransferSucceeded: true
-          };
-          
-          const config = {
-            headers: {
-              'Authorization': 'Bearer 893094e5-63fa-4904-ae34-57fda185af04',
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
-          };
-          
-          axios.post('https://withpaper.com/api/2022-08-12/checkout-link-intent', data, config)
-            .then((response) => {
-              console.log(response.data);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-    }
-
-    // ---------
-
 
     const INFURA_ID = process.env.NEXT_PUBLIC_INFURA
-
-    const provider = new ethers.providers.JsonRpcProvider(`https://polygon-mumbai.infura.io/v3/${INFURA_ID}`)
-        
-    provider.once('purchased', () => {
-        console.log('a tx just occurred')
-        // bridge(host, owner, tokenUri)
-    })
-
+    
     async function fetch() {
-        const contract = new ethers.Contract(
-            EventifyAddress,
-            EventfiyAbi,
-            provider
+      const provider = new ethers.providers.JsonRpcProvider(`https://polygon-mumbai.infura.io/v3/${INFURA_ID}`)
+      const contract = new ethers.Contract(
+        EventifyAddress,
+        EventfiyAbi,
+        provider
         );
         
         const data = await contract.unverifiedEvents();
@@ -162,7 +91,6 @@ const Active = () => {
 
 
     function click() {
-        generateLink(2)
         console.log('clicked')
     }
 
@@ -265,6 +193,71 @@ const Active = () => {
       </div>
       
     )
+}
+
+export async function getServerSideProps(context) {
+
+  const data = {
+    contractId: "f5b49e5b-2027-44c8-892c-911a17dffbea",
+    title: "Mumbai Example",
+    description: "Describe your project *with Markdown!*",
+    imageUrl: "https://unsplash.it/240/240",
+    expiresInMinutes: 15,
+    limitPerTransaction: 5,
+    twitterHandleOverride: "string",
+    successCallbackUrl: "string",
+    redirectAfterPayment: false,
+    cancelCallbackUrl: "string",
+    walletAddress: context.walletAddress,
+    email: context.email,
+    sendEmailOnCreation: false,
+    requireVerifiedEmail: false,
+    quantity: 1,
+    metadata: {},
+    mintMethod: {
+      name: "buyTicket",
+      args: {
+          _ticketId: context.tokenId,
+          _host: context.walletAddress,
+      },
+      payment: {
+        currency: "MATIC",
+        value: "0.01 * 1"
+      }
+    },
+    eligibilityMethod: {
+      name: "string",
+      args: {
+        METHOD_ARG_NAME: "Unknown Type: mixed type"
+      }
+    },
+    contractArgs: "string",
+    feeBearer: "BUYER",
+    hideNativeMint: false,
+    hidePaperWallet: false,
+    hideExternalWallet: false,
+    hidePayWithCard: false,
+    hidePayWithCrypto: false,
+    hidePayWithIdeal: true,
+    sendEmailOnTransferSucceeded: true
+  };
+  
+  const config = {
+    headers: {
+      'Authorization': 'Bearer 893094e5-63fa-4904-ae34-57fda185af04',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  };
+
+
+  const response = axios.post('https://withpaper.com/api/2022-08-12/checkout-link-intent', data, config)
+  const result = response.json();
+  const test = {hey: 'hello'}
+
+  return {
+    props: result,
+  };
 }
 
 export default Active
