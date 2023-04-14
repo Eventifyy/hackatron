@@ -20,7 +20,7 @@ const CreateNFT = () => {
   const [formInput, setFormInput] = useState({
     price: '',
     name: '',
-    cover: null,
+    cover: '',
     description: '',
     date: '',
     venue: '',
@@ -63,7 +63,7 @@ const CreateNFT = () => {
 
   const metadata = async () => {
     const { price, name, cover, description, date, venue, supply } = formInput
-    if (!name || !price || !description || !date || !venue || !supply) return
+    if (!name || !cover || !price || !description || !date || !venue || !supply) return
     const data = JSON.stringify({ name, cover, description, date, venue })
     const files = [new File([data], 'data.json')]
     try {

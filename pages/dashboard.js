@@ -7,6 +7,7 @@ import { EventifyAddress, EventfiyAbi } from "../config";
 import { ethers } from "ethers";
 import axios from "axios";
 import Footer from "../components/Footer";
+import Image from "next/image";
 
 export default function Dashboard() {
   const [sdk, setSdk] = useState();
@@ -93,7 +94,6 @@ export default function Dashboard() {
 
   return (
     <section class="text-white body-font  bg-[#151c25] ">
-          <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient" />
       <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-wrap w-full mb-20">
           <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
@@ -104,11 +104,14 @@ export default function Dashboard() {
           </div>
           <div class="lg:w-1/2 w-full leading-relaxed text-white ">
             <div className="h-full flex items-center sm:justify-center justify-center text-center sm:text-left">
+            <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient" />
 
-          <img
-              alt="team"
-              class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-              src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzrAYqzJv4xWvpZ3Pxc2z_Zt11yUJMHXYGEmMkFY0QSMxkXvI_39WMWOPkXG_GVlAOIFU&usqp=CAU'
+          
+            <Image 
+            className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
+            src="/people-01.png"
+            width={48}
+            height={48}
             />
             <div class="flex-grow sm:pl-8 ">
               <h2 class="title-font font-medium text-lg text-white">

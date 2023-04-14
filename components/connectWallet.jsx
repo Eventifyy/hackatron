@@ -7,7 +7,6 @@ export default function Sign() {
     const [logged, setLogged] = useState(false)
     const [user, setUser] = useState({})
 
-
     const clientId = process.env.NEXT_PUBLIC_PAPER_KEY
 
     useEffect(() => {
@@ -41,7 +40,6 @@ export default function Sign() {
     function click() {
         console.log(user.status)
     }
-
 
     return (
         <div>

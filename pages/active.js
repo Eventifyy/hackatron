@@ -43,9 +43,76 @@ const Active = () => {
     async function getUserInfo() {
       if (sdk) {
         const result = await sdk.getUser()
-        setUser(result?.walletAddress || '')
+        setUser(result)
       }
     }
+
+    // ---------
+
+    async function generateLink(__tokenId) {
+        const data = {
+            contractId: "f5b49e5b-2027-44c8-892c-911a17dffbea",
+            title: "Mumbai Example",
+            description: "Describe your project *with Markdown!*",
+            imageUrl: "https://unsplash.it/240/240",
+            expiresInMinutes: 15,
+            limitPerTransaction: 5,
+            twitterHandleOverride: "string",
+            successCallbackUrl: "string",
+            redirectAfterPayment: false,
+            cancelCallbackUrl: "string",
+            walletAddress: user.walletAddress,
+            email: user.authDetails.email,
+            sendEmailOnCreation: false,
+            requireVerifiedEmail: false,
+            quantity: 1,
+            metadata: {},
+            mintMethod: {
+              name: "buyTicket",
+              args: {
+                  _ticketId: __tokenId,
+                  _host: user.walletAddress,
+              },
+              payment: {
+                currency: "MATIC",
+                value: "0.01 * 1"
+              }
+            },
+            eligibilityMethod: {
+              name: "string",
+              args: {
+                METHOD_ARG_NAME: "Unknown Type: mixed type"
+              }
+            },
+            contractArgs: "string",
+            feeBearer: "BUYER",
+            hideNativeMint: false,
+            hidePaperWallet: false,
+            hideExternalWallet: false,
+            hidePayWithCard: false,
+            hidePayWithCrypto: false,
+            hidePayWithIdeal: true,
+            sendEmailOnTransferSucceeded: true
+          };
+          
+          const config = {
+            headers: {
+              'Authorization': 'Bearer 893094e5-63fa-4904-ae34-57fda185af04',
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          };
+          
+          axios.post('https://withpaper.com/api/2022-08-12/checkout-link-intent', data, config)
+            .then((response) => {
+              console.log(response.data);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+    }
+
+    // ---------
 
 
     const INFURA_ID = process.env.NEXT_PUBLIC_INFURA
@@ -93,24 +160,16 @@ const Active = () => {
         setLoaded(true);
     }
 
-    async function bridge(host, owner, tokenUri) {
 
+    function click() {
+        generateLink(2)
+        console.log('clicked')
     }
-
-
-    function Card(prop) {
-        return (
-            <div>
-                {prop.tokenId}
-            </div>
-        )
-    }
-
-    function click() { }
 
 
     return(
       <div>
+        
 
         <section className={`sm:p-16 xs:p-8 px-10 py-12 relative z-10 bg-[#151c25] `}>
         <motion.div
@@ -125,7 +184,7 @@ const Active = () => {
           <TypingText title="| Insight" textStyles="text-center" />
           <TitleText title={<>Insight about events</>} textStyles="text-center" />
           <div className="mt-[50px] flex flex-col gap-[30px]">
-
+                <button onClick={click}>debug</button>
 
             {items.map((item,i) =>{
                 return(
