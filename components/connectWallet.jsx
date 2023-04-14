@@ -46,7 +46,7 @@ export default function Sign() {
     return (
         <div>
             {user.status == 'Logged In, Wallet Initialized' ? <button onClick={logout}>Logout</button> : <button onClick={login}>Login</button>}
-            <button onClick={click}>click</button>
+            {/* <button onClick={click}>click</button> */}
         </div>
     )
 }

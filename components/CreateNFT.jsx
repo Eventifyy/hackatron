@@ -6,12 +6,12 @@ import {
   setLoadingMsg,
   setAlert,
 } from '../store'
-import { useState } from 'react'
+import { useDebugValue, useEffect, useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import { Web3Storage } from 'web3.storage'
 import web3modal from 'web3modal'
 import { ethers } from 'ethers'
-import { EventifyAddress, EventfiyAbi } from "../config"
+import { EventifyAddress, EventfiyAbi } from '../config'
 
 const CreateNFT = () => {
   const [modal] = useGlobalState('modal')
@@ -26,6 +26,7 @@ const CreateNFT = () => {
     venue: '',
     supply: '',
   })
+
 
   // -----------
 
@@ -62,7 +63,7 @@ const CreateNFT = () => {
 
   const metadata = async () => {
     const { price, name, cover, description, date, venue, supply } = formInput
-    // if (!name || !price || !description || !date || !venue || !supply) return
+    if (!name || !price || !description || !date || !venue || !supply) return
     const data = JSON.stringify({ name, cover, description, date, venue })
     const files = [new File([data], 'data.json')]
     try {
@@ -77,25 +78,30 @@ const CreateNFT = () => {
 
   const mint = async (e) => {
     e.preventDefault()
-	
+
     // need metamask
     const modal = new web3modal({
-		network: 'mumbai',
-		cacheProvider: true,
+      network: 'mumbai',
+      cacheProvider: true,
     })
     const connection = await modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
     const contract = new ethers.Contract(EventifyAddress, EventfiyAbi, signer)
-	const metadataUrl = await metadata()
+    const metadataUrl = await metadata()
     const price = ethers.utils.parseEther(formInput.price)
     const supply = formInput.supply
-    const publish = await contract.host(price, supply, metadataUrl, {
-      gasLimit: 1000000,
-    })
+    const publish = await contract.host(
+      price,
+      supply,
+      metadataUrl,
+      {
+        gasLimit: 1000000,
+      },
+    )
     await publish.wait()
     console.log(publish)
-	closeModal()
+    closeModal()
   }
 
   // -----------
@@ -109,6 +115,7 @@ const CreateNFT = () => {
     // setFormInput({})
     setImgBase64(null)
   }
+
 
   return (
     <div
@@ -134,10 +141,7 @@ const CreateNFT = () => {
               <img
                 alt="NFT"
                 className="h-full w-full object-cover cursor-pointer"
-                src={
-                  imgBase64 ||
-                  './download.gif'
-                }
+                src={imgBase64 || './download.gif'}
               />
             </div>
           </div>
@@ -158,6 +162,7 @@ const CreateNFT = () => {
                 onChange={changeImage}
                 required
               />
+              {/* <button onClick={click}>Debug</button> */}
             </label>
           </div>
 

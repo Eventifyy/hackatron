@@ -21,9 +21,9 @@ const InsightCard = (props) => {
         <h4 className="font-normal lg:text-[42px] text-[26px] text-white">
           {props.name}
         </h4>
-        {/* <p className="mt-[16px] font-normal lg:text-[20px] text-[14px] text-[#C6C6C6]">
-          {props.discr}
-        </p> */}
+        <p className="mt-[16px] font-normal lg:text-[20px] text-[14px] text-[#C6C6C6]">
+          {props.description}
+        </p>
       </div>
 
 

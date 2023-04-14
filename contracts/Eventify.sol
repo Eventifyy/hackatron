@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 
 /* upon hosting, tickets are whitelisted by admin and then only they can be purchased. 
-A whitelisted ticket contrains a shareable link */
+A whitelisted ticket contains a shareable link */
 contract Eventify is ERC1155URIStorage, ERC1155Holder {
     address owner;
 
@@ -36,24 +36,18 @@ contract Eventify is ERC1155URIStorage, ERC1155Holder {
         address owner;
         string buyLink;
         bool whitelisted;
+        uint256 tokenId;
+        string description;
     }
 
-    uint256 ticketId;
+    mapping(uint256 => Ticket) public idToTicket;
 
-    mapping(uint256 => Ticket) idToTicket;
-
-    function host(uint _price, uint _supply, string memory _tokenURI) public payable {
-        Ticket memory ticket = idToTicket[ticketId];
+    function host(uint _price, uint _supply, string memory _tokenURI, string memory _description) public payable {
         _tokenId.increment();
-        uint currentToken = _tokenId.current();
+        uint256 currentToken = _tokenId.current();
         _mint(msg.sender, currentToken, _supply, "");
         _setURI(currentToken, _tokenURI);
-        ticketId++;
-        ticket.host = msg.sender;
-        ticket.supply = _supply;
-        ticket.remaining = _supply;
-        ticket.price = _price;
-        ticket.whitelisted = false;
+        idToTicket[currentToken] = Ticket(msg.sender, _supply, _supply, _price, msg.sender, "", false, currentToken, _description);
         _safeTransferFrom(msg.sender, address(this), currentToken, _supply, "");
     }
 
@@ -119,5 +113,27 @@ contract Eventify is ERC1155URIStorage, ERC1155Holder {
             }
         }
         return unsoldTickets;
+    }
+    
+    function unverifiedEvents() public view returns (Ticket[] memory) {
+        uint256 counter = 0;
+        uint256 length;
+
+        for (uint256 i = 0; i < _tokenId.current(); i++) {
+            if (idToTicket[i + 1].whitelisted == false) {
+                length++;
+            }
+        }
+
+        Ticket[] memory myTickets = new Ticket[](length);
+        for (uint256 i = 0; i < _tokenId.current(); i++) {
+            if (idToTicket[i + 1].whitelisted == false) {
+                uint256 currentId = i + 1;
+                Ticket storage currentItem = idToTicket[currentId];
+                myTickets[counter] = currentItem;
+                counter++;
+            }
+        }
+        return myTickets;
     }
 }

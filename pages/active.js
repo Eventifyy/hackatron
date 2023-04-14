@@ -4,6 +4,7 @@ import styles from '../styles/style';
 import { staggerContainer } from '../utils/motion';
 import InsightCard from '../components/InsightsCard';
 import { TypingText, TitleText } from '../components/CustomTexts';
+import { PaperEmbeddedWalletSdk } from '@paperxyz/embedded-wallet-service-sdk'
 
 
 import { useEffect, useState } from 'react';
@@ -14,10 +15,36 @@ import axios from "axios";
 const Active = () => {
     const [items, setItems] = useState([]);
     const [loaded, setLoaded] = useState(false);
+    const [sdk, setSdk] = useState()
+    const [user, setUser] = useState({})
+
     console.log(items,"items loaded")
     useEffect(() => {
         fetch();
     }, []);
+
+    const clientId = process.env.NEXT_PUBLIC_PAPER_KEY
+
+    useEffect(() => {
+      setSdk(
+        new PaperEmbeddedWalletSdk({
+          clientId: clientId,
+          chain: 'Mumbai',
+        }),
+      )
+    }, [])
+  
+    useEffect(() => {
+      getUserInfo()
+    }, [sdk])
+  
+    async function getUserInfo() {
+      if (sdk) {
+        const result = await sdk.getUser()
+        setUser(result?.walletAddress || '')
+      }
+    }
+
 
     const INFURA_ID = process.env.NEXT_PUBLIC_INFURA
 
@@ -39,6 +66,7 @@ const Active = () => {
         const itemsFetched = await Promise.all(
             data.map(async (i) => {
                 const tokenUri = await contract.uri(i.tokenId.toString());
+                console.log(tokenUri)
                 const meta = await axios.get(tokenUri);
                 let price = ethers.utils.formatEther(i.price);
                 let item = {
@@ -114,6 +142,7 @@ const Active = () => {
                     tokenId={item.supply}
                     supply={item.supply}
                     remaining={item.remaining}
+                    description={item.description}
                     host={item.host}
                     buyLink={item.buyLink}
                     />

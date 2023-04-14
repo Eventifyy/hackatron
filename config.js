@@ -1,4 +1,4 @@
-export const EventifyAddress = "0xdd6Ef32c5c6F64a388601E1b506A638d97775aaE"
+export const EventifyAddress = "0xE5Db7403150F506504Cc2D0AcED15868c0F8F9b4"
 
 export const BridgeAddress = ""
 
@@ -171,6 +171,11 @@ export const EventfiyAbi = [
 						"internalType": "uint256",
 						"name": "tokenId",
 						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
 					}
 				],
 				"internalType": "struct Eventify.Ticket[]",
@@ -253,6 +258,11 @@ export const EventfiyAbi = [
 				"internalType": "uint256",
 				"name": "_ticketId",
 				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_host",
+				"type": "address"
 			}
 		],
 		"name": "buyTicket",
@@ -275,6 +285,11 @@ export const EventfiyAbi = [
 			{
 				"internalType": "string",
 				"name": "_tokenURI",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_description",
 				"type": "string"
 			}
 		],
@@ -332,6 +347,11 @@ export const EventfiyAbi = [
 				"internalType": "uint256",
 				"name": "tokenId",
 				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -382,6 +402,11 @@ export const EventfiyAbi = [
 						"internalType": "uint256",
 						"name": "tokenId",
 						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
 					}
 				],
 				"internalType": "struct Eventify.Ticket[]",
@@ -642,6 +667,11 @@ export const EventfiyAbi = [
 						"internalType": "uint256",
 						"name": "tokenId",
 						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
 					}
 				],
 				"internalType": "struct Eventify.Ticket[]",
