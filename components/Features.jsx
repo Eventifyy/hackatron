@@ -1,14 +1,37 @@
 'use client';
 
 import { motion } from 'framer-motion';
-
+import { useEffect, useRef } from "react";
+import Lottie from "lottie-web";
 import styles from '../styles/style';
 import { startingFeatures } from '../constants';
 import StartSteps from './StartSteps';
 import { TitleText, TypingText } from './CustomTexts';
 import { staggerContainer, fadeIn, planetVariants } from '../utils/motion';
 
-const Features = () => (
+const Features = () => {
+
+  const containerRef = useRef(null);
+    const animationRef = useRef(null);
+  
+
+
+    useEffect(() => {
+      animationRef.current = Lottie.loadAnimation({
+        container: containerRef.current,
+        renderer: 'svg',
+        loop: false,
+        autoplay: true,
+        animationData: require('../public/4429-ticket-scanning.json'),
+      });
+  
+      return () => {
+        animationRef.current.destroy();
+      };
+    }, []);
+
+  
+  return(
   <section className={`${styles.paddings} relative z-10`}>
     <motion.div
       variants={staggerContainer}
@@ -21,11 +44,13 @@ const Features = () => (
         variants={planetVariants('left')}
         className={`flex-1 ${styles.flexCenter}`}
       >
-        <img
+        {/* <img
           src="/get-started.png"
           alt="get-started"
           className="w-[90%] h-[90%] object-contain"
-        />
+        /> */}
+      <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`} ref={containerRef}/>
+
       </motion.div>
       <motion.div
         variants={fadeIn('left', 'tween', 0.2, 1)}
@@ -45,6 +70,8 @@ const Features = () => (
       </motion.div>
     </motion.div>
   </section>
-);
+  )
+}
+;
 
 export default Features;

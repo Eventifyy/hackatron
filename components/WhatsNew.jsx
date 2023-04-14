@@ -1,14 +1,33 @@
 'use client';
 
 import { motion } from 'framer-motion';
-
+import { useEffect, useRef } from "react";
+import Lottie from "lottie-web";
 import styles from '../styles/style'; 
 import { newFeatures } from '../constants';
 import NewFeatures from './NewFeatures';
 import { TitleText, TypingText } from './CustomTexts';
 import { planetVariants, staggerContainer, fadeIn } from '../utils/motion';
 
-const WhatsNew = () => (
+const WhatsNew = () => {
+  const containerRef = useRef(null);
+  const animationRef = useRef(null);
+
+  useEffect(() => {
+    animationRef.current = Lottie.loadAnimation({
+      container: containerRef.current,
+      renderer: 'svg',
+      loop: false,
+      autoplay: true,
+      animationData: require('../public/140193-tickets.json'),
+    });
+
+    return () => {
+      animationRef.current.destroy();
+    };
+  }, []);
+  return(
+
   <section className={`${styles.paddings} relative z-10`}>
     <motion.div
       variants={staggerContainer}
@@ -34,14 +53,17 @@ const WhatsNew = () => (
         variants={planetVariants('right')}
         className={`flex-1 ${styles.flexCenter}`}
       >
-        <img
+        {/* <img
           src="/whats-new.png"
           alt="get-started"
           className="w-[90%] h-[90%] object-contain"
-        />
+        /> */}
+              <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`} ref={containerRef}/>
       </motion.div>
     </motion.div>
   </section>
-);
+  )
+}
+
 
 export default WhatsNew;

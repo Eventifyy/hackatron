@@ -92,34 +92,7 @@ export default function Dashboard() {
     }
 
 
-    return (
-        // <div className=''>
-        //     <div className='gradient-04 z-0'/>
-        //     <p>Dashboard</p>
-        //     <p>email: {user?.authDetails?.email || ""}</p>
-        //     <p>address: {user?.walletAddress || ""}</p>
-        //     {items.map((item,i) => {
-        //         <DashboardComponent
-        //             key={i}
-        //             price={item.price}
-        //             name={item.name}
-        //             cover={item.cover}
-        //             date={item.date}
-        //             venue={item.venue}
-        //             theme={item.theme}
-        //             tokenId={item.supply}
-        //             supply={item.supply}
-        //             remaining={item.remaining}
-        //             description={item.description}
-
-
-        //             host={item.host}
-        //         />
-        //     })}
-        //     <button onClick={click}>debug</button>
-            
-        // </div>
-
+    return ( 
 
 
         <section class="text-gray-600 body-font">
@@ -164,7 +137,8 @@ export default function Dashboard() {
       <div className="grid grid-cols-2 items-start gap-4">
                 {items.map((item,i) => (
                   <button className="w-[400px] flex flex-col justify-start gap-4 bg-white/5 p-3 rounded-md hover:bg-gray-200">
-                              <img class="lg:h-48 md:h-36 w-full object-cover object-center" src={item.cover}/>
+          <img class="h-40 rounded w-full object-cover object-center mb-6" src={item.cover} alt="content"/>
+
 
                   
                     <h1 className="font-semibold text-xl">

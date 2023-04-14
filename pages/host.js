@@ -11,7 +11,7 @@ export default function Host() {
     const [ status, setStatus ] = useState()
     const [userAddr, setUserAddr] = useState();
     const [sdk, setSdk] = useState()
-
+    
     const clientId = process.env.NEXT_PUBLIC_PAPER_KEY
     
     useEffect(()=> {
@@ -32,6 +32,7 @@ export default function Host() {
         }
 	}
 
+    
     
 
     return (

@@ -27,7 +27,7 @@ const HostComponent = () => {
 
   return (
     <div
-      className="bg-[url('https://cdn.pixabay.com/photo/2022/03/01/02/51/galaxy-7040416_960_720.png')]
+      className="host
         bg-no-repeat bg-cover"
     >
       <div className="flex flex-col justify-center items-center mx-auto py-10">
