@@ -29,7 +29,7 @@ const InsightCard = (props) => {
         {props.name}
       </h4>
       <h2 className="tracking-widest text-xs title-font font-medium text-gray-400">{formattedDate}</h2>
-      <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">{props.venue}
+      <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">{props.venue}
       </a>
       
       <p className="mt-[10px] font-normal lg:text-[20px] text-[14px] text-[#C6C6C6]">

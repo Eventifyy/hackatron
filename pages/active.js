@@ -132,7 +132,7 @@ const Active = () => {
                         {' '}
                         <Skeleton />
                       </h2>
-                      <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
+                      <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
                         <Skeleton />{' '}
                       </a>
 
