@@ -5,10 +5,11 @@ export default function Navbar() {
 
     const styles = {
         container: {
-            backgroundColor: 'blue',
+            backgroundColor: '#8A42D8',
             color: 'white',
             display: 'flex',
-            justifyContent: 'space-around'
+            justifyContent: 'space-around',
+            padding: "2px"
         },
     };
 
@@ -20,8 +21,8 @@ export default function Navbar() {
         //     <Link href="/dashboard"><p>Dashboard</p></Link>
         //     <Sign />
         // </div>
-        <div style={styles.container}>
-            <p>I am a beta version, kindly handle with care :)</p>
+        <div style={styles.container} className="bg-[]">
+            <p>I'm in beta now, things may break, please handle with care : )</p>
         </div>
     )
 }
