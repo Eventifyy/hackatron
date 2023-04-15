@@ -113,7 +113,7 @@ const Active = () => {
 
           {/* <TypingText title="| Insight" textStyles="text-center" /> */}
           <TitleText
-            title={<>Insight about events</>}
+            title={<>Insight about Featured events</>}
             textStyles="text-center"
           />
           <div className="mt-[50px] flex flex-col gap-[60px] h-[100vh]">

@@ -138,7 +138,7 @@ const HostComponent = () => {
   <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
     <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
       <h1 className="font-semibold lg:text-[42px] text-[26px] text-white">Host An Event</h1>
-      <p className="mt-[10px] font-normal lg:text-[20px] text-[14px] text-secondary-white">Individuals can host their own events on the platform for a nominal hosting fee.These events will be verified by the moderator before featuring them on Active Events page. 
+      <p className="mt-[10px] font-normal lg:text-[20px] text-[14px] text-secondary-white">Newly hosted events are first verified by moderators then available on featured events. 
 
 </p>
       <div className="flex w-full md:justify-start justify-center items-end">
