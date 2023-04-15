@@ -56,13 +56,13 @@ contract Eventify is ERC1155URIStorage, ERC1155Holder {
         idToTicket[_ticketId].whitelisted = true;
     }
 
-    function buyTicket(uint256 _ticketId) public payable {
+    function buyTicket(uint256 _ticketId, address _host) public payable {
         Ticket memory ticket = idToTicket[_ticketId];
-        require(msg.value > ticket.price, "price not payed");
+        require(msg.value >= ticket.price, "price not payed");
         require(ticket.whitelisted == true, "ticket is not whitelisted");
         require(ticket.remaining > 0);
-        _safeTransferFrom(address(this), msg.sender, _ticketId, 1, "");
-        ticket.owner = payable(msg.sender);
+        _safeTransferFrom(address(this), _host, _ticketId, 1, "");
+        ticket.owner = payable(_host);
         ticket.remaining--;
 
         uint256 fee = ticket.price / 100;
@@ -71,19 +71,19 @@ contract Eventify is ERC1155URIStorage, ERC1155Holder {
         payable(owner).transfer(fee);
     }
 
-    function inventory() public view returns (Ticket[] memory) {
+    function inventory(address _sender) public view returns (Ticket[] memory) {
         uint256 counter = 0;
         uint256 length;
 
         for (uint256 i = 0; i < _tokenId.current(); i++) {
-            if (idToTicket[i + 1].owner == msg.sender) {
+            if (idToTicket[i + 1].owner == _sender) {
                 length++;
             }
         }
 
         Ticket[] memory myTickets = new Ticket[](length);
         for (uint256 i = 0; i < _tokenId.current(); i++) {
-            if (idToTicket[i + 1].owner == msg.sender) {
+            if (idToTicket[i + 1].owner == _sender) {
                 uint256 currentId = i + 1;
                 Ticket storage currentItem = idToTicket[currentId];
                 myTickets[counter] = currentItem;
