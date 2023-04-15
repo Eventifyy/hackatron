@@ -123,7 +123,7 @@ const CreateNFT = () => {
           justify-center bg-black bg-opacity-50 transform
           transition-transform duration-300 ${modal}`}
     >
-      <div className="bg-[#151c25] shadow-xl shadow-[#e32970] rounded-xl w-11/12 md:w-2/5 h-7/12 p-6">
+      <div className="bg-[#151c25] shadow-xl shadow-[#8A42D8] rounded-xl w-11/12 md:w-2/5 h-7/12 p-6">
         <form className="flex flex-col">
           <div className="flex flex-row justify-between items-center">
             <p className="font-semibold text-gray-400">Add Event</p>
@@ -169,8 +169,8 @@ const CreateNFT = () => {
           <div className="flex flex-row justify-between items-center bg-gray-800 rounded-xl mt-5">
             <input
               className="block w-full text-sm
-                  text-slate-500 bg-transparent border-0
-                  focus:outline-none focus:ring-0"
+                  text-white bg-transparent border-0
+                  focus:outline-none focus:ring-0 py-1 ml-2"
               type="text"
               name="title"
               placeholder="Name"
@@ -184,8 +184,8 @@ const CreateNFT = () => {
           <div className="flex flex-row justify-between items-center bg-gray-800 rounded-xl mt-5">
             <textarea
               className="block w-full text-sm resize-none
-                  text-slate-500 bg-transparent border-0
-                  focus:outline-none focus:ring-0 h-20"
+                  text-white bg-transparent border-0
+                  focus:outline-none focus:ring-0 h-19 ml-2 mt-2"
               type="text"
               name="description"
               placeholder="Description"
@@ -199,8 +199,8 @@ const CreateNFT = () => {
           <div className="flex flex-row justify-between items-center bg-gray-800 rounded-xl mt-5">
             <input
               className="block w-full text-sm
-                  text-slate-500 bg-transparent border-0
-                  focus:outline-none focus:ring-0"
+                  text-white bg-transparent border-0
+                  focus:outline-none focus:ring-0 py-1 ml-2"
               type="text"
               name="venue"
               placeholder="Venue"
@@ -215,7 +215,7 @@ const CreateNFT = () => {
             <input
               className="block w-full text-sm
                   text-slate-500 bg-transparent border-0
-                  focus:outline-none focus:ring-0"
+                  focus:outline-none focus:ring-0 ml-2 py-1"
               type="date"
               name="date"
               placeholder="Date"
@@ -229,8 +229,8 @@ const CreateNFT = () => {
           <div className="flex flex-row justify-between items-center bg-gray-800 rounded-xl mt-5">
             <input
               className="block w-full text-sm
-                  text-slate-500 bg-transparent border-0
-                  focus:outline-none focus:ring-0"
+                  text-white bg-transparent border-0
+                  focus:outline-none focus:ring-0 py-1 ml-2"
               type="number"
               name="host"
               placeholder="Supply"
@@ -244,13 +244,13 @@ const CreateNFT = () => {
           <div className="flex flex-row justify-between items-center bg-gray-800 rounded-xl mt-5">
             <input
               className="block w-full text-sm
-                  text-slate-500 bg-transparent border-0
-                  focus:outline-none focus:ring-0"
+                  text-white bg-transparent border-0
+                  focus:outline-none focus:ring-0 py-1 ml-2"
               type="number"
               step={0.01}
               min={0.01}
               name="price"
-              placeholder="Price (Eth)"
+              placeholder="Price (MATIC)"
               onChange={(e) =>
                 setFormInput({ ...formInput, price: e.target.value })
               }
@@ -261,29 +261,17 @@ const CreateNFT = () => {
           <button
             onClick={mint}
             className="flex flex-row justify-center items-center
-                w-full text-white text-md bg-[#e32970]
-                hover:bg-[#bd255f] py-2 px-5 rounded-full
+                w-full text-white text-md bg-[#8A42D8]
+                py-2 px-5 rounded-full
                 drop-shadow-xl border border-transparent
-                hover:bg-transparent hover:text-[#e32970]
-                hover:border hover:border-[#bd255f]
+                hover:bg-transparent hover:text-[#8A42D8]
+                hover:border hover:bg-indigo-700
                 focus:outline-none focus:ring mt-5"
           >
-            Host bitch
+            Host Event
           </button>
 
-          <button
-            type="submit"
-            onClick={mint}
-            className="flex flex-row justify-center items-center
-                w-full text-white text-md bg-[#e32970]
-                hover:bg-[#bd255f] py-2 px-5 rounded-full
-                drop-shadow-xl border border-transparent
-                hover:bg-transparent hover:text-[#e32970]
-                hover:border hover:border-[#bd255f]
-                focus:outline-none focus:ring mt-5"
-          >
-            Dummy
-          </button>
+
         </form>
       </div>
     </div>

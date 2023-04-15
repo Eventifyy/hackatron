@@ -166,7 +166,7 @@ export default function MainHeader() {
               Book a free trial
             </Link> */}
            
-             <a className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-[#8A42D8] px-4 py-2 text-base font-medium text-black shadow-sm hover:bg-indigo-700"><Sign/></a> 
+             <a className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-[#8A42D8] px-4 py-2 text-base font-normal text-[16px] text-white shadow-sm hover:bg-indigo-700 gap-[12px]"><Sign/></a> 
           </div>
         </div>
       </div>

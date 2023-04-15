@@ -39,7 +39,11 @@ export default function Host() {
 
 
         <div className="bg-[#00040f] overflow-hidden">
+                    {/* <div className="gradient-03 z-0" /> */}
+
+
         <HostComponent />
+
       <div className="relative">
         <div className="gradient-03 z-0" />
           <Features />

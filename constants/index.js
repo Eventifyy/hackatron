@@ -52,17 +52,10 @@ export const navLinks = [
       url: '/twitter.svg',
     },
     {
-      name: 'linkedin',
-      url: '/linkedin.svg',
-    },
-    {
-      name: 'instagram',
-      url: '/instagram.svg',
-    },
-    {
-      name: 'facebook',
-      url: '/facebook.svg',
-    },
+      name: 'github',
+      url: '/github_icon.png',
+    }
+    
   ];
 
   export const insights = [

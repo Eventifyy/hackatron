@@ -17,6 +17,7 @@ export default function Home() {
       </div>
 
       <div className={`bg-[#00040f] ${styles.flexStart}`}>
+      <div className="absolute z-[0] w-[40%] h-[35%] top-[20] pink__gradient" />
         <div className={`${styles.boxWidth}`}>
           <Hero />
         </div>

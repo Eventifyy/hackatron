@@ -4,7 +4,7 @@ import { staggerContainer } from '../utils/motion';
 import InsightCard from '../components/InsightsCard';
 import { TypingText, TitleText } from '../components/CustomTexts';
 import { PaperEmbeddedWalletSdk } from '@paperxyz/embedded-wallet-service-sdk'
-
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { EventifyAddress, EventfiyAbi } from "../config"
 import { ethers } from "ethers";
@@ -169,9 +169,11 @@ const Active = ({result}) => {
         <div className="mb-[50px] h-[2px] bg-white opacity-10" />
 
         <div className="flex items-center justify-between flex-wrap gap-4">
-          <h4 className="font-extrabold text-[24px] text-white">
-            EVENTIFY
-          </h4>
+        <Image
+          width={120}
+          height={40}
+          src='/logo.svg'
+          />
           <p className="font-normal text-[14px] text-white opacity-50">
             Copyright © 2023 Eventify. All rights reserved.
           </p>
