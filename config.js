@@ -1,4 +1,4 @@
-export const EventifyAddress = "0x5c926dDf632A10DABbA4a5A39a651a208d6b99E6"
+export const EventifyAddress = "0x1dfAD97D199767904818cA4196bEc0a24d2E4Ae6"
 
 export const BridgeAddress = ""
 
@@ -520,7 +520,13 @@ export const EventfiyAbi =[
 		"type": "function"
 	},
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_sender",
+				"type": "address"
+			}
+		],
 		"name": "inventory",
 		"outputs": [
 			{

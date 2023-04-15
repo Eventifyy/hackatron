@@ -6,6 +6,10 @@ import {
   setLoadingMsg,
   setAlert,
 } from '../store'
+import {
+  PaperEmbeddedWalletSdk,
+  UserStatus,
+} from '@paperxyz/embedded-wallet-service-sdk'
 import { useDebugValue, useEffect, useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import { Web3Storage } from 'web3.storage'
@@ -27,6 +31,31 @@ const CreateNFT = () => {
     supply: '',
   })
 
+
+  const [sdk, setSdk] = useState()
+  const [user, setUser] = useState({})
+
+  const clientId = process.env.NEXT_PUBLIC_PAPER_KEY
+
+  useEffect(() => {
+    setSdk(
+      new PaperEmbeddedWalletSdk({
+        clientId: clientId,
+        chain: 'Mumbai',
+      }),
+    )
+  }, [])
+
+  useEffect(() => {
+    getUserInfo()
+  }, [sdk])
+  
+  async function getUserInfo() {
+    if (sdk) {
+      const result = await sdk.getUser()
+      setUser(result)
+    }
+  }
 
   // -----------
 
@@ -63,7 +92,8 @@ const CreateNFT = () => {
 
   const metadata = async () => {
     const { price, name, cover, description, date, venue, supply } = formInput
-    if (!name || !cover || !price || !description || !date || !venue || !supply) return
+    if (!name || !cover || !price || !description || !date || !venue || !supply)
+      return
     const data = JSON.stringify({ name, cover, description, date, venue })
     const files = [new File([data], 'data.json')]
     try {
@@ -76,31 +106,58 @@ const CreateNFT = () => {
     }
   }
 
+  // const mint = async (e) => {
+  //   e.preventDefault()
+
+  //   // need metamask
+  //   const modal = new web3modal({
+  //     network: 'mumbai',
+  //     cacheProvider: true,
+  //   })
+  //   const connection = await modal.connect()
+  //   const provider = new ethers.providers.Web3Provider(connection)
+  //   const signer = provider.getSigner()
+  //   const contract = new ethers.Contract(EventifyAddress, EventfiyAbi, signer)
+  //   const metadataUrl = await metadata()
+  //   const price = ethers.utils.parseEther(formInput.price)
+  //   const supply = formInput.supply
+  //   const publish = await contract.host(
+  //     price,
+  //     supply,
+  //     metadataUrl,
+  //     {
+  //       gasLimit: 1000000,
+  //     },
+  //   )
+  //   await publish.wait()
+  //   console.log(publish)
+  //   closeModal()
+  // }
+
   const mint = async (e) => {
     e.preventDefault()
 
     // need metamask
-    const modal = new web3modal({
-      network: 'mumbai',
-      cacheProvider: true,
-    })
-    const connection = await modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
-    const signer = provider.getSigner()
+    const { user } = await sdk.auth.loginWithPaperModal()
+    const signer = await user.wallet.getEthersJsSigner()
+
     const contract = new ethers.Contract(EventifyAddress, EventfiyAbi, signer)
     const metadataUrl = await metadata()
     const price = ethers.utils.parseEther(formInput.price)
     const supply = formInput.supply
-    const publish = await contract.host(
-      price,
-      supply,
-      metadataUrl,
-      {
-        gasLimit: 1000000,
-      },
-    )
-    await publish.wait()
-    console.log(publish)
+
+    const params = {
+      contractAddress: EventifyAddress,
+      methodInterface:
+        'function host(uint _price, uint _supply, string memory _tokenURI, string memory _description) public payable',
+      methodArgs: [price, supply, metadataUrl, ""],
+    }
+    const {
+      transactionHash,
+    } = await user.wallet.gasless.callContract(params)
+    
+
+    console.log('txn completed:', transactionHash)
     closeModal()
   }
 
@@ -115,7 +172,6 @@ const CreateNFT = () => {
     // setFormInput({})
     setImgBase64(null)
   }
-
 
   return (
     <div
@@ -270,8 +326,6 @@ const CreateNFT = () => {
           >
             Host Event
           </button>
-
-
         </form>
       </div>
     </div>

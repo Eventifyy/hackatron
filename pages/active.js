@@ -56,10 +56,6 @@ const Active = () => {
     `https://polygon-mumbai.infura.io/v3/${INFURA_ID}`,
   )
 
-  provider.once('purchased', () => {
-    console.log('a tx just occurred')
-    // bridge(host, owner, tokenUri)
-  })
 
   async function fetch() {
     const contract = new ethers.Contract(EventifyAddress, EventfiyAbi, provider)
@@ -69,7 +65,7 @@ const Active = () => {
       data.map(async (i) => {
         const tokenUri = await contract.uri(i.tokenId.toString())
         console.log(tokenUri)
-        const meta = await axios.get(tokenUri)
+        const meta = await axios.get(tokenUri + "/")
         let price = ethers.utils.formatEther(i.price)
         let item = {
           price,
