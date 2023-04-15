@@ -16,15 +16,18 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={`bg-[#00040f] ${styles.flexStart}`}>
+      <div className={`bg-[#00040f] ${styles.flexStart} relative`}>
       <div className="absolute z-[0] w-[40%] h-[35%] top-[20] pink__gradient" />
-        <div className={`${styles.boxWidth}`}>
+      <div className="gradient-04 z-0 " />
+      <div className="gradient-03 z-0 " />
+        <div className={`${styles.boxWidth} relative`}>
           <Hero />
         </div>
       </div>
-      <div >
+      <div className="relative">
         <Explore/>
         <World />
+        
       <div className="gradient-04 z-0 " />
       <div className="gradient-03 z-0 " />
       </div>

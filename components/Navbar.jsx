@@ -20,7 +20,7 @@ export default function Navbar() {
         //     <Sign />
         // </div>
         <div style={styles.container} className="bg-[]">
-            <p>I&apos;m in beta right now, things may break, please handle with care :)</p>
+            <p className="text-xs sm:text-xs">I&apos;m in beta right now, things may break, please handle with care :)</p>
         </div>
     )
 }
