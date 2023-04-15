@@ -14,6 +14,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 export default function Dashboard() {
   const [sdk, setSdk] = useState()
   const [user, setUser] = useState({})
+  
   const clientId = process.env.NEXT_PUBLIC_PAPER_KEY
   const date = new Date()
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
@@ -37,7 +38,7 @@ export default function Dashboard() {
     if (sdk) {
       const result = await sdk.getUser()
       setUser(result)
-      // fetch()
+      fetch()
     }
   }
 
@@ -56,8 +57,8 @@ export default function Dashboard() {
     setIsLoading(true)
 
     const contract = new ethers.Contract(EventifyAddress, EventfiyAbi, provider)
-    const addr = ethers.utils.getAddress(user.walletAddress)
-    const data = await contract.inventory(addr)
+    const addr =  user.walletAddress
+    const data = await contract.inventory(`${addr}`)
     const itemsFetched = await Promise.all(
       data.map(async (i) => {
         const tokenUri = await contract.uri(i.tokenId.toString())
