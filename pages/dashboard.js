@@ -7,6 +7,8 @@ import { EventifyAddress, EventfiyAbi } from "../config";
 import { ethers } from "ethers";
 import axios from "axios";
 import Footer from "../components/Footer";
+import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton"
 
 export default function Dashboard() {
   const [sdk, setSdk] = useState();
@@ -15,6 +17,8 @@ export default function Dashboard() {
   const date = new Date();
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = date.toLocaleDateString(undefined, options);  
+  const [isLoading, setIsLoading] = useState(true)
+
 
 
   useEffect(() => {
@@ -50,12 +54,14 @@ export default function Dashboard() {
     const provider = new ethers.providers.JsonRpcProvider(
       `https://polygon-mumbai.infura.io/v3/${INFURA_ID}`
     );
+    setIsLoading(true);
+
     const contract = new ethers.Contract(
       EventifyAddress,
       EventfiyAbi,
       provider
     );
-    const data = await contract.unverifiedEvents();
+    const data = await contract.inventory();
     const itemsFetched = await Promise.all(
       data.map(async (i) => {
         const tokenUri = await contract.uri(i.tokenId.toString());
@@ -80,6 +86,7 @@ export default function Dashboard() {
 
     console.log(items);
     setItems(itemsFetched);
+    setIsLoading(false)
     setLoaded(true);
   }
 
@@ -92,8 +99,8 @@ export default function Dashboard() {
   }
 
   return (
-    <section class="text-white body-font  bg-[#151c25] ">
-          <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient" />
+    <section class="text-white body-font  bg-[#151c25] overflow-hidden">
+          <div className="absolute z-[0] w-[40%] h-[35%] top-[20] pink__gradient" />
       <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-wrap w-full mb-20">
           <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
@@ -108,7 +115,7 @@ export default function Dashboard() {
           <img
               alt="team"
               class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-              src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzrAYqzJv4xWvpZ3Pxc2z_Zt11yUJMHXYGEmMkFY0QSMxkXvI_39WMWOPkXG_GVlAOIFU&usqp=CAU'
+              src='/people-01.png'
             />
             <div class="flex-grow sm:pl-8 ">
               <h2 class="title-font font-medium text-lg text-white">
@@ -168,8 +175,9 @@ export default function Dashboard() {
 
 
 
-        <div className="grid grid-cols-2 items-start gap-4">
-          {items.map((item, i) => (
+        <div className="grid grid-cols-3 items-start h-[100vh] ">
+
+          { (loaded == true && !items.length)? <h1 className="p-10 m-10 items-center font-semibold text-3xl ">You didn't have a ticket yet!</h1> : items.map((item, i) => (
             <button className="w-[300px] flex flex-col justify-start p-3 ml-3 rounded-md bg-gray-200">
               <img
                 class="h-40 rounded w-full object-cover object-center mb-3"

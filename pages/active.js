@@ -10,15 +10,16 @@ import { EventifyAddress, EventfiyAbi } from "../config"
 import { ethers } from "ethers";
 import axios from "axios";
 import { socials } from '../constants';
-
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton"
+import 'react-loading-skeleton/dist/skeleton.css'
 import { footerVariants } from '../utils/motion';
 
-const Active = ({result}) => {
+const Active = () => {
     const [items, setItems] = useState([]);
     const [loaded, setLoaded] = useState(false);
     const [sdk, setSdk] = useState()
     const [user, setUser] = useState({})
-
+    const [isLoading, setIsLoading] = useState(true)
 
     console.log(items,"items loaded")
     useEffect(() => {
@@ -43,23 +44,27 @@ const Active = ({result}) => {
     async function getUserInfo() {
       if (sdk) {
         const result = await sdk.getUser()
-        setUser(result)
+        setUser(result?.walletAddress || '')
       }
     }
 
-    // ---------
-
 
     const INFURA_ID = process.env.NEXT_PUBLIC_INFURA
-    
-    async function fetch() {
-      const provider = new ethers.providers.JsonRpcProvider(`https://polygon-mumbai.infura.io/v3/${INFURA_ID}`)
-      const contract = new ethers.Contract(
-        EventifyAddress,
-        EventfiyAbi,
-        provider
-        );
+
+    const provider = new ethers.providers.JsonRpcProvider(`https://polygon-mumbai.infura.io/v3/${INFURA_ID}`)
         
+    provider.once('purchased', () => {
+        console.log('a tx just occurred')
+        // bridge(host, owner, tokenUri)
+    })
+
+    async function fetch() {
+        const contract = new ethers.Contract(
+            EventifyAddress,
+            EventfiyAbi,
+            provider
+        );
+        setIsLoading(true);
         const data = await contract.unverifiedEvents();
         const itemsFetched = await Promise.all(
             data.map(async (i) => {
@@ -67,7 +72,6 @@ const Active = ({result}) => {
                 console.log(tokenUri)
                 const meta = await axios.get(tokenUri);
                 let price = ethers.utils.formatEther(i.price);
-                // generate buy link
                 let item = {
                     price,
                     name: meta.data.name,
@@ -79,7 +83,7 @@ const Active = ({result}) => {
                     tokenId: i.tokenId.toNumber(),
                     remaining: i.remaining.toNumber(),
                     host: i.host,
-                    // buyLink: _buyLink
+                    buyLink: i.buyLink.toString(),
                 };
                 return item;
             })
@@ -88,19 +92,29 @@ const Active = ({result}) => {
         setItems(itemsFetched);
         // console.log(itemsFetched);
         setLoaded(true);
+        setIsLoading(false)
+    }
+
+    async function bridge(host, owner, tokenUri) {
+
     }
 
 
-    function click() {
-        console.log('clicked')
+    function Card(prop) {
+        return (
+            <div>
+                {prop.tokenId}
+            </div>
+        )
     }
+
+    function click() { }
 
 
     return(
-      <div>
-        
+      <div className='bg-[#9542E8] overflow-hidden w-100vh'>
 
-        <section className={`sm:p-16 xs:p-8 px-10 py-12 relative z-10 bg-[#151c25] `}>
+        <section className={`sm:p-16 xs:p-8 px-10 py-12 relative z-10 bg-[#151c25] w-100vh`}>
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -110,12 +124,80 @@ const Active = ({result}) => {
         >
                       <div className="gradient-04 z-0" />
 
-          <TypingText title="| Insight" textStyles="text-center" />
+          {/* <TypingText title="| Insight" textStyles="text-center" /> */}
           <TitleText title={<>Insight about events</>} textStyles="text-center" />
-          <div className="mt-[50px] flex flex-col gap-[30px]">
-                <button onClick={click}>debug</button>
+          <div className="mt-[50px] flex flex-col gap-[60px] ">
 
-            {items.map((item,i) =>{
+
+            {isLoading ?           
+              <SkeletonTheme baseColor="#202020" highlightColor="#444">
+<motion.div
+    className="flex md:flex-row flex-col gap-4"
+  >
+    
+    
+
+    <div className="md:w-[270px] w-full h-[250px] rounded-[32px] object-cover">
+      <Skeleton width={250} height={250}/>
+    </div>
+    <div className="w-full flex justify-between items-center">
+    <div className="flex-1 md:ml-[62px] flex flex-col max-w-[650px]">
+
+      <h4 className="font-normal lg:text-[42px] text-[26px] text-white">
+        <Skeleton/>
+      </h4>
+      <h2 className="tracking-widest text-xs title-font font-medium text-gray-400"> <Skeleton/>
+      </h2>
+      <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
+      <Skeleton/>      </a>
+      
+      <p className="mt-[10px] font-normal lg:text-[20px] text-[14px] text-[#C6C6C6]">
+      <Skeleton/>      </p>
+     
+
+      <button className=" inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-2 py-2 text-base font-medium text-black shadow-sm hover:bg-indigo-700" > <Skeleton/></button> 
+
+    </div>
+  </div>
+
+  </motion.div>
+<motion.div
+    className="flex md:flex-row flex-col gap-4"
+  >
+    
+    
+    {/* <img
+      src={props.cover}
+      className="md:w-[270px] w-full h-[250px] rounded-[32px] object-cover"
+    /> */}
+    <div className="md:w-[270px] w-full h-[250px] rounded-[32px] object-cover">
+      <Skeleton width={250} height={250}/>
+    </div>
+    <div className="w-full flex justify-between items-center">
+    <div className="flex-1 md:ml-[62px] flex flex-col max-w-[650px]">
+
+      <h4 className="font-normal lg:text-[42px] text-[26px] text-white">
+        <Skeleton/>
+      </h4>
+      <h2 className="tracking-widest text-xs title-font font-medium text-gray-400"> <Skeleton/>
+      </h2>
+      <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
+      <Skeleton/>      </a>
+      
+      <p className="mt-[10px] font-normal lg:text-[20px] text-[14px] text-[#C6C6C6]">
+      <Skeleton/>      </p>
+     
+
+      <button className=" inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-2 py-2 text-base font-medium text-black shadow-sm hover:bg-indigo-700" > <Skeleton/></button> 
+
+    </div>
+  </div>
+
+  </motion.div>
+              </SkeletonTheme>
+
+         
+        : items.map((item,i) =>{
                 return(
                     
                     <InsightCard 
@@ -169,7 +251,10 @@ const Active = ({result}) => {
         <div className="mb-[50px] h-[2px] bg-white opacity-10" />
 
         <div className="flex items-center justify-between flex-wrap gap-4">
-        <Image
+          {/* <h4 className="font-extrabold text-[24px] text-white">
+            EVENTIFY
+          </h4> */}
+                    <Image
           width={120}
           height={40}
           src='/logo.svg'
@@ -196,71 +281,6 @@ const Active = ({result}) => {
       </div>
       
     )
-}
-
-export async function getServerSideProps(context) {
-
-  const data = {
-    contractId: "f5b49e5b-2027-44c8-892c-911a17dffbea",
-    title: "Mumbai Example",
-    description: "Describe your project *with Markdown!*",
-    imageUrl: "https://unsplash.it/240/240",
-    expiresInMinutes: 15,
-    limitPerTransaction: 5,
-    twitterHandleOverride: "string",
-    successCallbackUrl: "string",
-    redirectAfterPayment: false,
-    cancelCallbackUrl: "string",
-    walletAddress: context.walletAddress,
-    email: context.email,
-    sendEmailOnCreation: false,
-    requireVerifiedEmail: false,
-    quantity: 1,
-    metadata: {},
-    mintMethod: {
-      name: "buyTicket",
-      args: {
-          _ticketId: context.tokenId,
-          _host: context.walletAddress,
-      },
-      payment: {
-        currency: "MATIC",
-        value: "0.01 * 1"
-      }
-    },
-    eligibilityMethod: {
-      name: "string",
-      args: {
-        METHOD_ARG_NAME: "Unknown Type: mixed type"
-      }
-    },
-    contractArgs: "string",
-    feeBearer: "BUYER",
-    hideNativeMint: false,
-    hidePaperWallet: false,
-    hideExternalWallet: false,
-    hidePayWithCard: false,
-    hidePayWithCrypto: false,
-    hidePayWithIdeal: true,
-    sendEmailOnTransferSucceeded: true
-  };
-  
-  const config = {
-    headers: {
-      'Authorization': 'Bearer 893094e5-63fa-4904-ae34-57fda185af04',
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  };
-
-
-  const response = axios.post('https://withpaper.com/api/2022-08-12/checkout-link-intent', data, config)
-  const result = response.data;
-  const test = {hey: 'hello'}
-
-  return {
-    props: result,
-  };
 }
 
 export default Active
