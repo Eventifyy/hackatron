@@ -1,7 +1,6 @@
 import close from "./close.svg";
 import facebook from './facebook_icon.png';
 import twitter from './twitter_icon.png';
-import linkedin from './linkedin_icon.png';
 import medium from './medium_icon.png';
 import github from './github_icon.png';
 import menu from "./menu.svg";
@@ -15,6 +14,5 @@ export{
     medium,
     facebook,
     twitter,
-    linkedin,
     avatar
 }
