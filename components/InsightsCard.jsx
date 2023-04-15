@@ -28,15 +28,18 @@ const InsightCard = (props) => {
       <h4 className="font-normal lg:text-[42px] text-[26px] text-white">
         {props.name}
       </h4>
+
       <h2 className="tracking-widest text-xs title-font font-medium text-gray-400">{formattedDate}</h2>
+
       <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">{props.venue}
       </a>
+      
       
       <p className="mt-[10px] font-normal lg:text-[20px] text-[14px] text-[#C6C6C6]">
         {props.description}
       </p>
      
-      <Link href={props.buyLink}  className=" inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-2 py-2 text-base font-medium text-black shadow-sm hover:bg-indigo-700">
+      <Link href={props.buyLink}  className=" inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-2 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
 
       <button >Buy Now</button> 
       </Link>

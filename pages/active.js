@@ -140,10 +140,11 @@ const Active = () => {
                         <Skeleton />{' '}
                       </p>
 
-                      <button className=" inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-2 py-2 text-base font-medium text-black shadow-sm hover:bg-indigo-700">
+                      {/* <button className=" inline-flex items-center justify-center rounded-md border border-transparent px-2 py-2 text-base font-medium text-black shadow-sm hover:bg-indigo-700">
                         {' '}
                         <Skeleton />
-                      </button>
+                      </button> */}
+                      <Skeleton height={40}/>
                     </div>
                   </div>
                 </motion.div>
