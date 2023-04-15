@@ -67,6 +67,7 @@ const Active = ({result}) => {
                 console.log(tokenUri)
                 const meta = await axios.get(tokenUri);
                 let price = ethers.utils.formatEther(i.price);
+                // generate buy link
                 let item = {
                     price,
                     name: meta.data.name,
@@ -78,7 +79,7 @@ const Active = ({result}) => {
                     tokenId: i.tokenId.toNumber(),
                     remaining: i.remaining.toNumber(),
                     host: i.host,
-                    buyLink: i.buyLink.toString(),
+                    // buyLink: _buyLink
                 };
                 return item;
             })
@@ -252,7 +253,7 @@ export async function getServerSideProps(context) {
 
 
   const response = axios.post('https://withpaper.com/api/2022-08-12/checkout-link-intent', data, config)
-  const result = response.json();
+  const result = response.data;
   const test = {hey: 'hello'}
 
   return {
