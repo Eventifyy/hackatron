@@ -1,4 +1,4 @@
-export const EventifyAddress = "0xf29Ad32067EbfC24933939415332378aD4f77d0C"
+export const EventifyAddress = "0x5c926dDf632A10DABbA4a5A39a651a208d6b99E6"
 
 export const BridgeAddress = ""
 

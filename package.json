@@ -9,10 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@biconomy/web3-auth": "^2.0.0",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.17",
-    "@next/font": "13.2.4",
     "@paperxyz/embedded-wallet-service-sdk": "^0.0.28",
     "@syncfusion/ej2": "^21.1.38",
     "@syncfusion/ej2-react-calendars": "^21.1.38",
