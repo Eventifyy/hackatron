@@ -15,7 +15,7 @@ import { socials } from '../constants'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { footerVariants } from '../utils/motion'
-
+import Link from 'next/link'
 const Active = () => {
   const [items, setItems] = useState([])
   const [loaded, setLoaded] = useState(false)
@@ -97,10 +97,14 @@ const Active = () => {
   function click() {}
 
   return (
-    <div className="bg-[#9542E8] overflow-hidden w-100vh">
+    <div className="overflow-hidden w-100vh">
+      <div className="absolute z-[0] w-[40%] h-[35%] top-[20] pink__gradient" />
       <section
-        className={`sm:p-16 xs:p-8 px-10 py-12 relative z-10 bg-[#151c25] w-100vh`}
+        className={`bg-[#151c25] sm:p-16 xs:p-8 px-10 py-12 relative z-10 w-100vh`}
       >
+
+
+                
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -108,14 +112,15 @@ const Active = () => {
           viewport={{ once: false, amount: 0.25 }}
           className={`${styles.innerWidth} mx-auto flex flex-col`}
         >
-          <div className="gradient-04 z-0" />
+          <div className="gradient-03 z-[-1]" />
+          {/* <div className="gradient-04 z-0" /> */}
 
           {/* <TypingText title="| Insight" textStyles="text-center" /> */}
           <TitleText
             title={<>Insight about events</>}
             textStyles="text-center"
           />
-          <div className="mt-[50px] flex flex-col gap-[60px] ">
+          <div className="mt-[50px] flex flex-col gap-[60px] h-[100vh]">
             {isLoading ? (
               <SkeletonTheme baseColor="#202020" highlightColor="#444">
                 <motion.div className="flex md:flex-row flex-col gap-4">
@@ -146,38 +151,7 @@ const Active = () => {
                     </div>
                   </div>
                 </motion.div>
-                <motion.div className="flex md:flex-row flex-col gap-4">
-                  {/* <img
-      src={props.cover}
-      className="md:w-[270px] w-full h-[250px] rounded-[32px] object-cover"
-    /> */}
-                  <div className="md:w-[270px] w-full h-[250px] rounded-[32px] object-cover">
-                    <Skeleton width={250} height={250} />
-                  </div>
-                  <div className="w-full flex justify-between items-center">
-                    <div className="flex-1 md:ml-[62px] flex flex-col max-w-[650px]">
-                      <h4 className="font-normal lg:text-[42px] text-[26px] text-white">
-                        <Skeleton />
-                      </h4>
-                      <h2 className="tracking-widest text-xs title-font font-medium text-gray-400">
-                        {' '}
-                        <Skeleton />
-                      </h2>
-                      <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
-                        <Skeleton />{' '}
-                      </a>
-
-                      <p className="mt-[10px] font-normal lg:text-[20px] text-[14px] text-[#C6C6C6]">
-                        <Skeleton />{' '}
-                      </p>
-
-                      <button className=" inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-2 py-2 text-base font-medium text-black shadow-sm hover:bg-indigo-700">
-                        {' '}
-                        <Skeleton />
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
+             
               </SkeletonTheme>
             ) : (
               items.map((item, i) => {
@@ -203,60 +177,64 @@ const Active = () => {
           </div>
         </motion.div>
       </section>
-      <div className="bg-[#151c25]">
-        <motion.footer
-          variants={footerVariants}
-          initial="hidden"
-          whileInView="show"
-          className={`${styles.xPaddings} py-8 relative`}
-        >
-          <div className="footer-gradient" />
-          <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
-            <div className="flex items-center justify-between flex-wrap gap-5">
-              <h4 className="font-bold md:text-[64px] text-[44px] text-white">
-                Book your Tickets
-              </h4>
-              <button
-                type="button"
-                className="flex items-center h-fit py-4 px-6 bg-[#8A42D8] rounded-[32px] gap-[12px]"
-              >
-                <img
-                  src="/headset.svg"
-                  alt="headset"
-                  className="w-[24px] h-[24px] object-contain"
-                />
-                <span className="font-normal text-[16px] text-white">
-                  Book Now
-                </span>
-              </button>
-            </div>
+      <div className="bg-[#151c25] ">
+      <motion.footer
+    variants={footerVariants}
+    initial="hidden"
+    whileInView="show"
+    className={`${styles.xPaddings} py-8 relative`}
+  >
+    <div className="footer-gradient" />
+    <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
+      <div className="flex items-center justify-between flex-wrap gap-5">
+        <h4 className="font-bold md:text-[64px] text-[44px] text-white">
+          {/* Book your Tickets */}
+        </h4>
+        <Link href="/host">
+        <button type="button" className="flex items-center h-fit py-4 px-6 bg-[#8A42D8] rounded-[32px] gap-[12px]" >
+          <img
+            src="/headset.svg"
+            alt="headset"
+            className="w-[24px] h-[24px] object-contain"
+          />
+          
+          <span className="font-normal text-[16px] text-white">
+            Book Now
+          </span>
+        </button>
+        </Link>
+      </div>
 
-            <div className="flex flex-col">
-              <div className="mb-[50px] h-[2px] bg-white opacity-10" />
+      <div className="flex flex-col">
+        <div className="mb-[50px] h-[2px] bg-white opacity-10" />
 
-              <div className="flex items-center justify-between flex-wrap gap-4">
-                {/* <h4 className="font-extrabold text-[24px] text-white">
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          {/* <h4 className="font-extrabold text-[24px] text-white">
             EVENTIFY
           </h4> */}
-                <Image width={120} height={40} src="/logo.svg" />
-                <p className="font-normal text-[14px] text-white opacity-50">
-                  Copyright © 2023 Eventify. All rights reserved.
-                </p>
+          <Image
+          width={120}
+          height={40}
+          src='/logo.svg'
+          />
+          <p className="font-normal text-[14px] text-white opacity-50">
+            Copyright © 2023 Eventify. All rights reserved.
+          </p>
 
-                <div className="flex gap-4">
-                  {socials.map((social) => (
-                    <img
-                      key={social.name}
-                      src={social.url}
-                      alt={social.name}
-                      className="w-[24px] h-[24px] object-contain cursor-pointer"
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
+          <div className="flex gap-4">
+            {socials.map((social) => (
+              <img
+                key={social.name}
+                src={social.url}
+                alt={social.name}
+                className="w-[24px] h-[24px] object-contain cursor-pointer"
+              />
+            ))}
           </div>
-        </motion.footer>
+        </div>
+      </div>
+    </div>
+  </motion.footer>
       </div>
     </div>
   )

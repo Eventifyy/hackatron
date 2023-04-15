@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const InsightCard = (props) => {
   console.log(props.cover)
@@ -35,8 +36,10 @@ const InsightCard = (props) => {
         {props.description}
       </p>
      
+      <Link href={props.buyLink}  className=" inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-2 py-2 text-base font-medium text-black shadow-sm hover:bg-indigo-700">
 
-      <button className=" inline-flex items-center justify-center rounded-md border border-transparent bg-[#8A42D8] px-2 py-2 text-base font-medium text-black shadow-sm hover:bg-indigo-700" onClick={props.buyLink}>Buy Now</button> 
+      <button >Buy Now</button> 
+      </Link>
 
     </div>
   </div>

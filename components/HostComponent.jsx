@@ -137,8 +137,10 @@ const HostComponent = () => {
 
   <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
     <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-      <h1 class="font-semibold lg:text-[42px] text-[26px] text-white">Knausgaard typewriter readymade marfa</h1>
-      <p class="mt-[10px] font-normal lg:text-[20px] text-[14px] text-secondary-white">Chillwave portland ugh, knausgaard fam polaroid iPhone. Man braid swag typewriter affogato, hella selvage wolf narwhal dreamcatcher.</p>
+      <h1 class="font-semibold lg:text-[42px] text-[26px] text-white">Host An Event</h1>
+      <p class="mt-[10px] font-normal lg:text-[20px] text-[14px] text-secondary-white">Individuals can host their own events on the platform for a nominal hosting fee.These NFTs can also be used to verify users and provide access not only to offline events but also to online token-gated meetings.
+
+</p>
       <div class="flex w-full md:justify-start justify-center items-end">
         <div class="relative mr-4 md:w-full lg:w-full xl:w-1/2 w-2/4">
           {/* <label for="hero-field" class="leading-7 text-sm text-white mt-[10px]">Placeholder</label> */}

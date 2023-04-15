@@ -84,19 +84,20 @@ export const navLinks = [
       imgUrl: '/vrpano.svg',
       title: 'A new world',
       subtitle:
-          'we have the latest update with new world for you to try never mind',
+          ' Eventify offers a secure, user-friendly, and efficient platform for hosting and attending events via NFTs.',
     },
     {
       imgUrl: '/headset.svg',
-      title: 'More realistic',
+      title: 'More Economic',
       subtitle:
-          'In the latest update, your eyes are narrow, making the world more realistic than ever',
+          'Since there are no Web3 wallets exposed to the user, they are not required to pay any gas fees. ',
     },
   ];
 
   export const startingFeatures = [
-    'Find a world that suits you and you want to enter',
-    'Enter the world by reading basmalah to be safe',
-    'No need to beat around the bush, just stay on the gas and have fun',
+    'Sign in to the Dapp using Gmail.',
+    'Go to active events, select any event from the list and click on the buy link.',
+    'Enter the card details given in Navbar and press checkout.',
+    'Check on Eventify dashboard for the Nft Ticket.    '
   ];
   

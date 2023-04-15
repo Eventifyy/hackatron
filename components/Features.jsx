@@ -44,11 +44,7 @@ const Features = () => {
         variants={planetVariants('left')}
         className={`flex-1 ${styles.flexCenter}`}
       >
-        {/* <img
-          src="/get-started.png"
-          alt="get-started"
-          className="w-[90%] h-[90%] object-contain"
-        /> */}
+        
       <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`} ref={containerRef}/>
 
       </motion.div>
@@ -57,7 +53,7 @@ const Features = () => {
         className="flex-[0.75] flex justify-center flex-col"
       >
         {/* <TypingText title="| How Eventify Works" /> */}
-        <TitleText title={<>Get started with just a few clicks</>} />
+        <TitleText title={<>How to use Eventify</>} />
         <div className="mt-[31px] flex flex-col max-w-[370px] gap-[24px]">
           {startingFeatures.map((feature, index) => (
             <StartSteps
