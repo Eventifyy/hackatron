@@ -13,4 +13,4 @@ NFT ticketing platform that prioritizes an exceptional user interface and experi
 <br />
 <br />
 
-[Video explanation]()
+[Video explanation](https://youtu.be/d5ubTjwtc2A)
