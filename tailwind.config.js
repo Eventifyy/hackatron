@@ -10,6 +10,9 @@ module.exports = {
   ],
     theme: {
     extend: {
+      colors: {
+        'secondary-white': '#c7c7c7',
+      },
       
     },
   },
