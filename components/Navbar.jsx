@@ -5,7 +5,7 @@ export default function Navbar() {
 
     const styles = {
         container: {
-            backgroundColor: 'black',
+            backgroundColor: 'blue',
             color: 'white',
             display: 'flex',
             justifyContent: 'space-around'
@@ -13,12 +13,15 @@ export default function Navbar() {
     };
 
     return (
+        // <div style={styles.container}>
+        //     <Link href="/"><p>Eventify</p></Link>
+        //     <Link href="/host"><p>Host</p></Link>
+        //     <Link href="/events"><p>Events</p></Link>
+        //     <Link href="/dashboard"><p>Dashboard</p></Link>
+        //     <Sign />
+        // </div>
         <div style={styles.container}>
-            <Link href="/"><p>Eventify</p></Link>
-            <Link href="/host"><p>Host</p></Link>
-            <Link href="/events"><p>Events</p></Link>
-            <Link href="/dashboard"><p>Dashboard</p></Link>
-            <Sign />
+            <p>I am a beta version, kindly handle with care :)</p>
         </div>
     )
 }
