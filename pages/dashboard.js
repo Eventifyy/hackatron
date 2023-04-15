@@ -37,7 +37,7 @@ export default function Dashboard() {
     if (sdk) {
       const result = await sdk.getUser()
       setUser(result)
-      fetch()
+      // fetch()
     }
   }
 
@@ -56,7 +56,7 @@ export default function Dashboard() {
     setIsLoading(true)
 
     const contract = new ethers.Contract(EventifyAddress, EventfiyAbi, provider)
-    const addr = ethers.utils.getAddress("0x0fD1e48D2dCB5C3Bd54d9409D4932FE9A535cb9B")
+    const addr = ethers.utils.getAddress(user.walletAddress)
     const data = await contract.inventory(addr)
     const itemsFetched = await Promise.all(
       data.map(async (i) => {
@@ -91,7 +91,7 @@ export default function Dashboard() {
       <button className="w-[300px] flex flex-col justify-start p-3 ml-3 rounded-md bg-gray-200">
         <img
           class="h-40 rounded w-full object-cover object-center mb-3"
-          src={v.cover}
+          src={prop.cover}
           alt="content"
         />
         <h4 className="font-semibold text-2xl text-black">{prop.name}</h4>
